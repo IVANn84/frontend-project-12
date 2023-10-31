@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { NotFoundPage, PageLogin } from './Components/Pages.jsx';
+import NotFoundPage from './Components/NotFoundPage.jsx';
+import PageLogin from './Components/PageLogin.jsx';
 import MainPage from './Components/MainPage.jsx';
 
 function App() {

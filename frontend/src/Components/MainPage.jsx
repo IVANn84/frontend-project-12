@@ -1,12 +1,6 @@
-import { Link } from 'react-router-dom';
-
 const MainPage = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link to="/login">LoginPage</Link>
-      </li>
-    </ul>
-  </nav>
+  <>
+    <div>MainPage</div>
+  </>
 );
 export default MainPage;
