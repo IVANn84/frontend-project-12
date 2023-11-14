@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
 import React, { useState } from 'react';
 import NotFoundPage from './Components/NotFoundPage.jsx';
 import PageLogin from './Components/PageLogin.jsx';
@@ -39,7 +45,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="login" element={<PageLogin />}></Route>
+          <Route path="/login" element={<PageLogin />}></Route>
           <Route
             path="/"
             element={

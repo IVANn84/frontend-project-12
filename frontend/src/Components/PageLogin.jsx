@@ -42,15 +42,14 @@ const PageLogin = () => {
         localStorage.setItem('userId', JSON.stringify(res.data));
         auth.logIn();
         navigate(location.state.from);
-        debugger
-      } catch (err) {
-        // formik.setSubmitting(false);
-        if (err.isAxiosError && err.response.status === 401) {
+        // debugger
+      } catch (error) {
+        if (error.isAxioserroror && error.response.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
           return;
         }
-        throw err;
+        throw error;
       }
     },
   });
