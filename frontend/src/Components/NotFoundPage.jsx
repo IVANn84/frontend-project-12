@@ -1,10 +1,8 @@
 
 const NotFoundPage  = () => (
-  <>
     <div>
       {'NotFoundPage'} content :{'ERROR 404'}
     </div>
-  </>
 );
 
 
