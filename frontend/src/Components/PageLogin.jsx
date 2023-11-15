@@ -8,17 +8,6 @@ import routes from '../hooks/routes.js';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 
-// const Schema = Yup.object().shape({
-//   username: Yup.string()
-//     .min(2, 'Минимум 2 буквы')
-//     .max(20, 'Максимум 20 букв')
-//     .required('Обязательное поле'),
-//   passsword: Yup.string()
-//     .min(2, 'Минимум 2 буквы')
-//     .max(20, 'Максимум 20 букв')
-//     .required('Обязательное поле'),
-// });
-
 const PageLogin = () => {
   const auth = useAuth();
   const [authFailed, setAuthFailed] = useState(false);
@@ -43,7 +32,7 @@ const PageLogin = () => {
         auth.logIn();
         navigate(location.state.from);
       } catch (error) {
-        if (error.isAxioserroror && error.response.status === 401) {
+        if (error.isAxiosError && error.response.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
           return;
