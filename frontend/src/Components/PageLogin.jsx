@@ -38,11 +38,10 @@ const PageLogin = () => {
       setAuthFailed(false);
 
       try {
-        const res = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(res.data));
+        const response = await axios.post(routes.loginPath(), values);
+        localStorage.setItem('userId', JSON.stringify(response.data));
         auth.logIn();
         navigate(location.state.from);
-        // debugger
       } catch (error) {
         if (error.isAxioserroror && error.response.status === 401) {
           setAuthFailed(true);
