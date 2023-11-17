@@ -29,14 +29,12 @@ const AuthProvider = ({ children }) => {
 };
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
+  // debugger
   const locattion = useLocation();
   return auth.loggedIn ? (
     children
   ) : (
-    <Navigate
-      to="/login"
-      state={{ from: locattion }}
-    /> /*разобраться с путем login */
+    <Navigate to="/login" state={{ from: locattion }} />
   );
 };
 

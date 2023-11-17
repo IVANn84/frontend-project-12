@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actions as channelsActions } from '../slices/channelsSlice.js';
+import useAuth from '../hooks/index.jsx';
 import routes from '../hooks/routes';
 
 const getAuthHeader = () => {
@@ -11,9 +14,19 @@ const getAuthHeader = () => {
 };
 
 const MainPage = () => {
+  
+  const dispatch = useDispatch();
+  const autch = useAuth();
   useEffect(() => {
-    const fetchData = async () =>
-      await axios.get(routes.usersPath(), { headers: getAuthHeader() });
+    const fetchData = async () => {
+      const { data } = await axios.get(routes.usersPath(), {
+        headers: getAuthHeader(),
+      });
+      const { channels } = data;
+      // debugger;
+      dispatch(channelsActions.setChannels(channels));
+    };
+
     fetchData();
   }, []);
 
