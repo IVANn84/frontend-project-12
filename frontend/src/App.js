@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import NotFoundPage from './Components/NotFoundPage.jsx';
 import PageLogin from './Components/PageLogin.jsx';
-import MainPage from './Components/MainPage.jsx';
+import ChatPage from './Components/ChatPage.jsx';
 import { Button, Navbar } from 'react-bootstrap';
 import authContext from './context/index.jsx';
 import useAuth from './hooks/index.jsx';
@@ -48,7 +48,7 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <MainPage />
+                <ChatPage />
               </PrivateRoute>
             }
           ></Route>
