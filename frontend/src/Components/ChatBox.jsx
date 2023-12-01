@@ -30,8 +30,6 @@ const ChatBox = () => {
 
   const messages = useSelector(selectorsMessage.selectAll);
 
-  debugger;
-
   // const { t } = useTranslation();
   // useEffect(() => {
   //   animateScroll.scrollToBottom({

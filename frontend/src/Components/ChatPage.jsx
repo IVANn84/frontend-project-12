@@ -17,7 +17,7 @@ const getAuthHeader = () => {
   return {};
 };
 
-const MainPage = () => {
+const ChatPage = () => {
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
   useEffect(() => {
@@ -63,4 +63,4 @@ const MainPage = () => {
     </>
   );
 };
-export default MainPage;
+export default ChatPage;
