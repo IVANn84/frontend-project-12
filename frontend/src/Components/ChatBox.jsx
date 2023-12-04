@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectorsChannels } from '../slices/channelsSlice.js';
 import { selectorsMessage } from '../slices/messagesSlice.js';
+import NewMessageForm from './NewMessageForm.jsx';
 
 // import {
 //   getCurrentChannel,
 //   getMessagesForCurrentChannel,
 // } from '../selectors.js';
-// import NewMessageForm from './NewMessageForm.jsx';
 
 const Message = ({ username, body }) => (
   <div className="text-break mb-2">
@@ -22,7 +22,9 @@ const Message = ({ username, body }) => (
 const ChatBox = () => {
   const channels = useSelector(selectorsChannels.selectAll);
 
-  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  const currentChannelId = useSelector(
+    (state) => state.channels.currentChannelId
+  );
 
   const currentChannel = useSelector((state) =>
     selectorsChannels.selectById(state, currentChannelId)
@@ -53,7 +55,7 @@ const ChatBox = () => {
         ))} */}
       </div>
       <div className="mt-auto px-5 py-3">
-        {/* {<NewMessageForm channel={channel} />} */}
+        <NewMessageForm channel={currentChannel} />
       </div>
     </div>
   );

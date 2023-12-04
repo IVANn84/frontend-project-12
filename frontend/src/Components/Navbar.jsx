@@ -1,22 +1,21 @@
 import React from 'react';
 import { Button, Navbar as BootstrapNavbar } from 'react-bootstrap';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import useAuth from '../hooks/index.jsx';
 
 const Navbar = () => {
   const { logOut, loggedIn } = useAuth();
-  // const { t } = useTranslation();
-  const res = useAuth();
-  
+  const { t } = useTranslation();
+
   return (
     <BootstrapNavbar bg="white" expand="lg" className="shadow-sm">
       <div className="container">
         <BootstrapNavbar.Brand as={Link} to="/">
-          Hexlet chat
+          {t('hexletChat')}
         </BootstrapNavbar.Brand>
-        {!!loggedIn && <Button onClick={logOut}>Выйти</Button>}
+        {!!loggedIn && <Button onClick={logOut}>{t('logOut')}</Button>}
       </div>
     </BootstrapNavbar>
   );

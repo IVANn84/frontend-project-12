@@ -1,19 +1,21 @@
-import { useFormik, Formik } from 'formik';
+import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import avatar from '../assets/avatar.jpg';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import * as Yup from 'yup';
 import useAuth from '../hooks/index.jsx';
 import routes from '../hooks/routes.js';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PageLogin = () => {
   const auth = useAuth();
+  const { t } = useTranslation();
   const [authFailed, setAuthFailed] = useState(false);
   const inputRef = useRef();
   const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -25,7 +27,6 @@ const PageLogin = () => {
     },
     onSubmit: async (values) => {
       setAuthFailed(false);
-
       try {
         const response = await axios.post(routes.loginPath(), values);
         localStorage.setItem('userId', JSON.stringify(response.data));
@@ -71,7 +72,7 @@ const PageLogin = () => {
                     required
                     ref={inputRef}
                   />
-                  <label htmlFor="username">Ваш ник</label>
+                  <Form.Label htmlFor="password">{t('username')}</Form.Label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
@@ -84,10 +85,10 @@ const PageLogin = () => {
                     isInvalid={authFailed}
                     required
                   />
-                  <Form.Label htmlFor="password">Пароль</Form.Label>
+                  <Form.Label htmlFor="password">{t('password')}</Form.Label>
                   {
                     <Form.Control.Feedback type="invalid" tooltip>
-                      Неверное имя пользователя или пароль
+                      {t('authFailed')}
                     </Form.Control.Feedback>
                   }
                 </Form.Group>
@@ -96,14 +97,14 @@ const PageLogin = () => {
                   variant="outline-primary"
                   className="w-100 mb-3"
                 >
-                  Войти
+                  {t('submit')}
                 </Button>
               </Form>
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>Нет аккаунта ?</span>{' '}
-                <Link to="/signup">Регистрация</Link>
+                <span>{t('newToChat')}</span>{' '}
+                <Link to="/signup">{t('signup')}</Link>
               </div>
             </div>
           </div>
