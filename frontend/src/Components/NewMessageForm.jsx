@@ -1,88 +1,84 @@
 import React, { useEffect, useRef } from 'react';
-import { Form, InputGroup, Button } from 'react-bootstrap';
-// import { ArrowRightSquare } from 'react-bootstrap-icons';
+import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import leoProfanity from 'leo-profanity';
-// import { useRollbar } from '@rollbar/react';
-
-// import getLogger from '../lib/logger.js';
-// import { useApi, useAuth } from '../hooks/index.js';
-
-// const log = getLogger('client');
-
+import { useAuth, useSocket } from '../hooks';
+import { useSelector } from 'react-redux';
+import SendMessageIcon from '../icons/SendMessagesIcons.jsx';
 
 const NewMessageForm = ({ channel }) => {
   const { t } = useTranslation();
-  // const {
-  //   user: { username },
-  // } = useAuth();
+  const socket = useSocket();
+  const auth = useAuth();
   const inputRef = useRef(null);
-  // const api = useApi();
-  // const rollbar = useRollbar();
 
- 
+  const currentChannelId = useSelector(
+    (state) => state.channels.currentChannelId
+  );
 
-  const validationSchema = yup.object().shape({
-    body: yup.string().trim().required('Required'),
-  });
-
-  const f = useFormik({
-    initialValues: { body: '' },
-    validationSchema,
-    onSubmit: async ({ body }) => {
-      const filtered = leoProfanity.clean(body);
-      const message = {
-        body: filtered,
-        channelId: channel.id,
-        username,
-      };
-
+  const formik = useFormik({
+    initialValues: { messageBody: '' },
+    onSubmit: ({ messageBody }, { resetForm }) => {
       try {
-        log('message.send');
-        await api.sendMessage(message);
-        f.resetForm();
+        socket.newMessage({
+          body: messageBody,
+          channelId: currentChannelId,
+          username: auth.currentUser,
+        });
+
+        resetForm();
       } catch (err) {
-        // rollbar.error(err);
-        log('message.send.error', err);
+        console.error(err);
       }
-      f.setSubmitting(false);
-      inputRef.current.focus();
     },
-    validateOnBlur: false,
+    validationSchema: yup.object().shape({
+      messageBody: yup.string().required(),
+    }),
   });
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [currentChannelId]);
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, [channel, f.isSubmitting]);
-
-  const isInvalid = !f.dirty || !f.isValid;
+    if (formik.values.messageBody === '') {
+      inputRef.current.focus();
+    }
+  }, [formik.values.messageBody]);
 
   return (
-    <Form
-      noValidate
-      onSubmit={f.handleSubmit}
-      className="py-1 border rounded-2"
-    >
-      <InputGroup hasValidation={isInvalid}>
-        <Form.Control
-          ref={inputRef}
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.body}
-          name="body"
-          aria-label={t('chat.newMessage')}
-          disabled={f.isSubmitting}
-          placeholder="Введите сообщение..."
-          className="border-0 p-0 ps-2"
-        />
-        <Button variant="group-vertical" type="submit" disabled={isInvalid}>
-          {/* <ArrowRightSquare size={20} /> */}
-          <span className="visually-hidden">{t('chat.send')}</span>
-        </Button>
-      </InputGroup>
-    </Form>
+    <div className="mt-auto px-5 py-3">
+      <Form
+        onSubmit={formik.handleSubmit}
+        noValidate
+        className="py-1 border rounded-2"
+      >
+        <Form.Group className="input-group">
+          <Form.Control
+            ref={inputRef}
+            name="messageBody"
+            autoComplete="off"
+            aria-label={t('newMessage')}
+            placeholder={t('chat.newMessagePlaceholder')}
+            className="border-0 p-0 ps-2"
+            onChange={formik.handleChange}
+            value={formik.values.messageBody}
+            disabled={formik.isSubmitting}
+          />
+          <Button
+            type="submit"
+            variant="light"
+            className="border-0"
+            disabled={formik.isSubmitting}
+          >
+            <SendMessageIcon />
+            <span className="visually-hidden">{t('send')}</span>
+          </Button>
+        </Form.Group>
+      </Form>
+    </div>
   );
 };
 

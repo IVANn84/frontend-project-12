@@ -4,6 +4,7 @@ export const authContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem('userId')).username;
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
@@ -11,7 +12,7 @@ const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
   return (
-    <authContext.Provider value={{ logIn, logOut, loggedIn }}>
+    <authContext.Provider value={{ logIn, logOut, loggedIn, currentUser }}>
       {children}
     </authContext.Provider>
   );

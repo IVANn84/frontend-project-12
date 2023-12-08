@@ -8,6 +8,8 @@ import App from './Components/App.jsx';
 import io from 'socket.io-client';
 import AuthProvider from './context/AuthProvider.jsx';
 import SocketProvider from './context/SocketProvider.jsx';
+import { actions as channelsActions } from './slices/channelsSlice.js';
+import { actions as messagesActions } from './slices/messagesSlice.js';
 
 const init = async () => {
   const i18n = createInstance();
@@ -20,6 +22,11 @@ const init = async () => {
   };
   await i18n.use(initReactI18next).init(options);
   const socket = new io();
+
+  socket.on('newMessage', (payload) => {
+    debugger;
+    store.dispatch(messagesActions.addMessage(payload));
+  });
 
   return (
     <Provider store={store}>

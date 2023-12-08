@@ -9,7 +9,7 @@ import NotFoundPage from './NotFoundPage.jsx';
 import PageLogin from './PageLogin.jsx';
 import ChatPage from './ChatPage.jsx';
 import Navbar from './Navbar.jsx';
-import useAuth from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.jsx';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();

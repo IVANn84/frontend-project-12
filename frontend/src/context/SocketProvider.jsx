@@ -6,9 +6,10 @@ const SocketProvider = ({ socket, children }) => {
   const { t } = useTransition();
 
   const newMessage = async (messageData) => {
-    socket.emit('newMessage', messageData, (response) => {
-      // if (response.status !== 'ok') {
-      //   toast.error('ПИЗДЕЦ!!!');
+    socket.emit('newMessage', messageData, (error, response) => {
+      // if (error) {
+      //   throw new Error(error);
+      //   // toast.error('ПИЗДЕЦ!!!');
       // }
     });
   };

@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import avatar from '../assets/avatar.jpg';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import useAuth from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.jsx';
 import routes from '../hooks/routes.js';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';

@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { selectorsChannels } from '../slices/channelsSlice.js';
 import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
-// import { PlusSquare } from 'react-bootstrap-icons';
+import Channelicon from '../icons/Channelicon.jsx';
+import { useTranslation } from 'react-i18next';
 
 const Channel = ({ channel }) => {
-  
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId
   );
@@ -52,12 +52,24 @@ const Channel = ({ channel }) => {
   );
 };
 
+
 const ChannelsBox = () => {
+  const { t } = useTranslation();
+
   const channels = useSelector(selectorsChannels.selectAll);
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-        <b>Каналы</b>
+        <b>{t('chat.channels')}</b>
+        <Button
+          type="button"
+          variant="group-vertical"
+          className="p-0 text-primary"
+          // onClick={handleAddChannel}
+        >
+          <Channelicon />
+          <span className="visually-hidden">+</span>
+        </Button>
       </div>
       <ul
         id="channels-box"
