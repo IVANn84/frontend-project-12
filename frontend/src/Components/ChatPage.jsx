@@ -6,20 +6,14 @@ import { actions as messagesActions } from '../slices/messagesSlice.js';
 import { Spinner, Modal } from 'react-bootstrap';
 import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
-import useAuth from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.jsx';
 import routes from '../hooks/routes.js';
-
-const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  if (userId && userId.token) {
-    return { Authorization: `Bearer ${userId.token}` };
-  }
-  return {};
-};
 
 const ChatPage = () => {
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
+  const { getAuthHeader } = useAuth();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
