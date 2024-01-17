@@ -1,14 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectorsChannels } from '../slices/channelsSlice.js';
 import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
 import Channelicon from '../icons/Channelicon.jsx';
 import { useTranslation } from 'react-i18next';
+import { actions as modalsActions } from '../slices/modalsSlice.js';
+import { actions as channelsActions } from '../slices/channelsSlice.js';
 
-const Channel = ({ channel }) => {
-  const currentChannelId = useSelector(
-    (state) => state.channels.currentChannelId
-  );
-
+const Channel = ({
+  channel,
+  handleChoose,
+  currentChannelId,
+  handleRemoveChannel,
+  handleRenameChannel,
+}) => {
+  const { t } = useTranslation();
   const variant = channel.id === currentChannelId ? 'secondary' : null;
 
   return (
@@ -19,7 +24,7 @@ const Channel = ({ channel }) => {
             type="button"
             key={channel.id}
             className="w-100 rounded-0 text-start text-truncate"
-            onClick={handleChoose}
+            onClick={() => handleChoose(channel.id)}
             variant={variant}
           >
             <span className="me-1">#</span>
@@ -29,10 +34,10 @@ const Channel = ({ channel }) => {
             <span className="visually-hidden">{t('channels.menu')}</span>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={handleRemove(channel.id)}>
+            <Dropdown.Item onClick={() => handleRemoveChannel(channel.id)}>
               {t('channels.remove')}
             </Dropdown.Item>
-            <Dropdown.Item onClick={handleRename(channel.id)}>
+            <Dropdown.Item onClick={() => handleRenameChannel(channel.id)}>
               {t('channels.rename')}
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -42,6 +47,7 @@ const Channel = ({ channel }) => {
           type="button"
           key={channel.id}
           className="w-100 rounded-0 text-start text-truncate"
+          onClick={() => handleChoose(channel.id)}
           variant={variant}
         >
           <span className="me-1">#</span>
@@ -52,11 +58,31 @@ const Channel = ({ channel }) => {
   );
 };
 
-
 const ChannelsBox = () => {
   const { t } = useTranslation();
-
   const channels = useSelector(selectorsChannels.selectAll);
+  const currentChannelId = useSelector(
+    (state) => state.channels.currentChannelId
+  );
+  const dispatch = useDispatch();
+  const handleAddChannel = () =>
+    dispatch(modalsActions.openModal({ type: 'addChannel' }));
+
+  const handleChoose = (id) => dispatch(channelsActions.setCurrentChanel(id));
+  const handleRemoveChannel = (id) =>
+    dispatch(
+      modalsActions.openModal({
+        type: 'removeChannel',
+        extra: { channalId: id },
+      })
+    );
+  const handleRenameChannel = (id) =>
+    dispatch(
+      modalsActions.openModal({
+        type: 'renameChannel',
+        extra: { channalId: id },
+      })
+    );
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
@@ -65,7 +91,7 @@ const ChannelsBox = () => {
           type="button"
           variant="group-vertical"
           className="p-0 text-primary"
-          // onClick={handleAddChannel}
+          onClick={handleAddChannel}
         >
           <Channelicon />
           <span className="visually-hidden">+</span>
@@ -76,7 +102,14 @@ const ChannelsBox = () => {
         className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block"
       >
         {channels.map((channel) => (
-          <Channel key={channel.id} channel={channel} />
+          <Channel
+            key={channel.id}
+            channel={channel}
+            handleChoose={handleChoose}
+            currentChannelId={currentChannelId}
+            handleRemoveChannel={handleRemoveChannel}
+            handleRenameChannel={handleRenameChannel}
+          />
         ))}
       </ul>
     </>

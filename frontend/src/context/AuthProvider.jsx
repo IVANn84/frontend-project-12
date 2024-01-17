@@ -3,17 +3,19 @@ import { createContext, useState } from 'react';
 export const authContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const currentUser = JSON.parse(localStorage.getItem('userId')).name;
-  const [loggedIn, setLoggedIn] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem('userId'));
+  const [loggedIn, setLoggedIn] = useState(
+    currentUser ? { username: currentUser.username } : null
+  );
 
   const logIn = (userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
-    setLoggedIn(true);
+    setLoggedIn({ username: userData.username });
   };
 
   const logOut = () => {
     localStorage.removeItem('userId');
-    setLoggedIn(false);
+    setLoggedIn(null);
   };
 
   const getAuthHeader = () => {
@@ -25,9 +27,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <authContext.Provider
-      value={{ logIn, logOut, loggedIn, getAuthHeader, currentUser }}
-    >
+    <authContext.Provider value={{ logIn, logOut, loggedIn, getAuthHeader }}>
       {children}
     </authContext.Provider>
   );

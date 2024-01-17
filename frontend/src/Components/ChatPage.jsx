@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import { actions as messagesActions } from '../slices/messagesSlice.js';
-import { Spinner, Modal } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import ChannelsBox from './ChannelsBox.jsx';
+import getModalComponent from './modals/index.js';
 import ChatBox from './ChatBox.jsx';
 import { useAuth } from '../hooks/index.jsx';
 import routes from '../hooks/routes.js';
@@ -13,6 +14,7 @@ const ChatPage = () => {
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
   const { getAuthHeader } = useAuth();
+  const type = useSelector((state) => state.modals.type);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +45,7 @@ const ChatPage = () => {
     </div>
   ) : (
     <>
-      {/* <Modal /> */}
+      {getModalComponent(type)}
       <div className="container h-100 my-4 overflow-hidden rounded shadow">
         <div className="row h-100 bg-white flex-md-row">
           <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">

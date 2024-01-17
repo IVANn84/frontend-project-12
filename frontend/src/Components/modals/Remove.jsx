@@ -1,0 +1,63 @@
+import { Modal, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+// import { useRollbar } from '@rollbar/react';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
+import { useSocket } from '../../hooks';
+
+const Remove = () => {
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  // const rollbar = useRollbar();
+  const dispatch = useDispatch();
+  const socket = useSocket();
+  const isOpened = useSelector((state) => state.modals.isOpened);
+  const channalId = useSelector((state) => state.modals.extra.channalId);
+  // debugger;
+  const handleClose = () => dispatch(modalsActions.closeModal());
+  const handleRemove = async () => {
+    setLoading(true);
+    try {
+      socket.removeChannel(channalId);
+      // toast.success(t('notifications.removeChannel'));
+      dispatch(modalsActions.closeModal());
+    } catch (error) {
+      // toast.error(t('notifications.errorRemoveChannel'));
+      // rollbar.error('RemoveChannel', error);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal show={isOpened} centered>
+      <Modal.Header closeButton onHide={handleClose}>
+        <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p className="lead">{t('modal.confirmSure')}</p>
+        <div className="d-flex justify-content-end">
+          <Button
+            className="me-2"
+            variant="secondary"
+            type="button"
+            onClick={handleClose}
+            disabled={loading}
+          >
+            {t('modal.cancel')}
+          </Button>
+          <Button
+            variant="danger"
+            type="button"
+            onClick={handleRemove}
+            disabled={loading}
+          >
+            {t('modal.remove')}
+          </Button>
+        </div>
+      </Modal.Body>
+    </Modal>
+  );
+};
+export default Remove;

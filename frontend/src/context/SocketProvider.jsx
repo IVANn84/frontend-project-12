@@ -1,6 +1,7 @@
 import { createContext, useMemo, useTransition } from 'react';
-import { UseTranslationOptions } from 'react-i18next';
 import { toast } from 'react-bootstrap';
+import { useCallback } from 'react';
+
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
   const { t } = useTransition();
@@ -14,8 +15,32 @@ const SocketProvider = ({ socket, children }) => {
     });
   };
 
+  const newChannel = useCallback(
+    (newNameChannel) => {
+      socket.emit('newChannel', { name: newNameChannel });
+    },
+    [socket]
+  );
+
+  const removeChannel = useCallback(
+    (channelId) => {
+      socket.emit('removeChannel', { id: channelId });
+    },
+    [socket]
+  );
+
+  const renameChannel = useCallback(
+    (channelId, newNameChannel) => {
+      socket.emit('renameChannel', { id: channelId, name: newNameChannel });
+    },
+    [socket]
+  );
+
   const context = useMemo(() => ({
     newMessage,
+    newChannel,
+    removeChannel,
+    renameChannel,
   }));
   return (
     <SocketContext.Provider value={context}>{children}</SocketContext.Provider>

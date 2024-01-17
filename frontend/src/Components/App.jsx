@@ -11,6 +11,7 @@ import PageLogin from './PageLogin.jsx';
 import ChatPage from './ChatPage.jsx';
 import Navbar from './Navbar.jsx';
 import { useAuth } from '../hooks/index.jsx';
+import routes from '../hooks/routes.js';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -28,16 +29,19 @@ const App = () => (
       <div className="d-flex flex-column h-100">
         <Navbar />
         <Routes>
-          <Route path="/login" element={<PageLogin />}></Route>
+          <Route path={routes.chatPageLogin} element={<PageLogin />}></Route>
           <Route
-            path="/"
+            path={routes.chatPagePath}
             element={
               <PrivateRoute>
                 <ChatPage />
               </PrivateRoute>
             }
           ></Route>
-          <Route path="*" element={<NotFoundPage />}></Route>
+          <Route
+            path={routes.chatPageNoFound}
+            element={<NotFoundPage />}
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>

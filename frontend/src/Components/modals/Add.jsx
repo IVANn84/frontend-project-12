@@ -1,0 +1,109 @@
+import { useEffect, useRef } from 'react';
+import { useFormik } from 'formik';
+import { Modal, Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import { selectorsChannels } from '../../slices/channelsSlice.js';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
+// import { toast } from 'react-toastify';
+// import { useRollbar } from '@rollbar/react';
+import { useSocket } from '../../hooks/index';
+
+const Add = () => {
+  // const filterWords = useFilter();
+  const { t } = useTranslation();
+  const socket = useSocket();
+  const inputRef = useRef(null);
+  // eslint-disable-next-line arrow-body-style
+  const existingChannels = useSelector(selectorsChannels.selectAll).map(
+    ({ name }) => name
+  );
+  const dispath = useDispatch();
+  const isOpened = useSelector((state) => state.modals.isOpened);
+
+  // const rollbar = useRollbar();
+  const handlerClose = () => dispath(modalsActions.closeModal());
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const formik = useFormik({
+    initialValues: { name: '' },
+
+    validationSchema: yup.object().shape({
+      name: yup
+        .string()
+        .required(t('validation.emptyField'))
+        .min(3, t('validation.minMaxsimSymbols'))
+        .max(20, t('validation.minMaxsimSymbols'))
+        .test(
+          'is-unique',
+          t('validation.uniqueness'),
+          (value) => !existingChannels.includes(value)
+        ),
+    }),
+    validateOnBlur: false,
+    validateOnChange: false,
+    onSubmit: async ({ name }, { resetForm }) => {
+      // const filteredNameChannel = filterWords(name);
+
+      try {
+        await socket.newChannel(name);
+
+        // toast.success(t('notifications.addChannel'));
+        resetForm();
+      } catch (error) {
+        // toast.error(t('notifications.errorAddChannel'));
+        // rollbar.error('AddChannel', error);
+      } finally {
+        handlerClose();
+      }
+    },
+  });
+
+  return (
+    <Modal show={isOpened} centered>
+      <Modal.Header closeButton onHide={handlerClose}>
+        <Modal.Title>{t('modal.addChannel')}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group>
+            <Form.Control
+              required
+              ref={inputRef}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+              data-testid="input-name"
+              name="name"
+              isInvalid={formik.touched.name && formik.errors.name}
+            />
+            <Form.Label visuallyHidden>{t('modal.channelName')}</Form.Label>
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.name}
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handlerClose}>
+              {t('modal.send')}
+            </Button>
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={formik.isSubmitting}
+            >
+              {t('modal.cancel')}
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+};
+export default Add;
