@@ -6,11 +6,12 @@ import {
   useLocation,
 } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage.jsx';
+import Registration from './Registration.jsx';
 import AuthProvider from '../context/AuthProvider.jsx';
 import PageLogin from './PageLogin.jsx';
 import ChatPage from './ChatPage.jsx';
 import Navbar from './Navbar.jsx';
-import { useAuth } from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
 const PrivateRoute = ({ children }) => {
@@ -42,6 +43,8 @@ const App = () => (
             path={routes.chatPageNoFound}
             element={<NotFoundPage />}
           ></Route>
+          <Route path={routes.NotFoundPage} element={<NotFoundPage />}></Route>
+          <Route path={routes.chatSignup} element={<Registration />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

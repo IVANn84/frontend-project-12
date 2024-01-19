@@ -4,20 +4,42 @@ const ru = {
     password: 'Пароль',
     submit: 'Войти',
     newToChat: 'Нет аккаунта ?',
-    signup: 'Регистрация',
     authFailed: 'Неверное имя пользователя или пароль',
     hexletChat: 'Hexlet Chat',
     logOut: 'Выйти',
+
+    signup: {
+      required: 'Обязательное поле',
+      passMin: 'Не менее 6 символов',
+      mustMatch: 'Пароли должны совпадать',
+      username: 'Имя пользователя',
+      usernameConstraints: 'От 3 до 20 символов',
+      password: 'Пароль',
+      confirm: 'Подтвердите пароль',
+      alreadyExists: 'Такой пользователь уже существует',
+      submit: 'Зарегистрироваться',
+      header: 'Регистрация',
+    },
+
+    messagesCounter: {
+      messages_zero: '{{count}} сообщений',
+      messages_one: '{{count}} сообщение',
+      messages_few: '{{count}} сообщения',
+      messages_many: '{{count}} сообщений',
+    },
+
     chat: {
       send: 'Сообщение отправлено',
       newMessagePlaceholder: 'Введите сообщение...',
       channels: 'Каналы',
     },
+
     channels: {
       remove: 'Удалить',
       rename: 'Переименовать',
     },
-    modal: {
+
+    modals: {
       addChannel: 'Добавить канал',
       removeChannel: 'Удалить канал',
       renameChannel: 'Переименовать канал',
@@ -27,6 +49,7 @@ const ru = {
       confirmSure: 'Уверены ?',
       channelName: 'Имя канала',
     },
+
     validation: {
       userExists: 'Такой пользователь уже существует',
       authFailed: 'Неверные имя пользователя или пароль',
@@ -36,6 +59,7 @@ const ru = {
       passwordMatch: 'Пароли должны совпадать',
       uniqueness: 'Должно быть уникальным',
     },
+    
     notifications: {
       errMessage: 'Что то пошло не так, при отправке сообщения на сервер',
       another: 'Что то пошло не так',

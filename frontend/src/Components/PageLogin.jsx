@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import avatar from '../assets/avatar.jpg';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
@@ -103,7 +103,7 @@ const PageLogin = () => {
             <div className="card-footer p-4">
               <div className="text-center">
                 <span>{t('newToChat')}</span>{' '}
-                <Link to="/signup">{t('signup')}</Link>
+                <Link to="/signup">{t('signup.header')}</Link>
               </div>
             </div>
           </div>

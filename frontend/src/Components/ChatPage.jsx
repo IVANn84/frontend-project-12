@@ -7,7 +7,7 @@ import { Spinner } from 'react-bootstrap';
 import ChannelsBox from './ChannelsBox.jsx';
 import getModalComponent from './modals/index.js';
 import ChatBox from './ChatBox.jsx';
-import { useAuth } from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
 const ChatPage = () => {
