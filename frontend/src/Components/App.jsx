@@ -5,7 +5,7 @@ import {
   Navigate,
   useLocation,
 } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundPage from './NotFoundPage.jsx';
 import Registration from './Registration.jsx';
@@ -48,7 +48,7 @@ const App = () => (
           <Route path={routes.NotFoundPage} element={<NotFoundPage />}></Route>
           <Route path={routes.chatSignup} element={<Registration />}></Route>
         </Routes>
-        <ToastContainer />
+        <ToastContainer position='bottom-center'/>
       </div>
     </BrowserRouter>
   </AuthProvider>

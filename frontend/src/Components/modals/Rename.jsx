@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 // import { useRollbar } from '@rollbar/react';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
@@ -24,7 +24,6 @@ const Rename = () => {
   const oldNameChannel =
     useSelector(selectorsChannels.selectAll).find(({ id }) => id === channalId)
       ?.name || '';
-  // debugger;
 
   const formik = useFormik({
     initialValues: { name: oldNameChannel },
@@ -44,10 +43,10 @@ const Rename = () => {
       // const filteredRename = filterWords(name);
       try {
         await socket.renameChannel(channalId, name);
-        // toast.success(t('notifications.renameChannel'));
+        toast.success(t('notifications.renameChannel'));
         dispatch(modalsActions.closeModal());
       } catch (error) {
-        // toast.error(t('notifications.errorRenameChannel'));
+        toast.error(t('notifications.errorRenameChannel'));
         // rollbar.error('RenameChannel', error);
       }
     },

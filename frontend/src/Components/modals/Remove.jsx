@@ -1,7 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 // import { useRollbar } from '@rollbar/react';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
@@ -21,10 +21,10 @@ const Remove = () => {
     setLoading(true);
     try {
       socket.removeChannel(channalId);
-      // toast.success(t('notifications.removeChannel'));
+      toast.success(t('notifications.removeChannel'));
       dispatch(modalsActions.closeModal());
     } catch (error) {
-      // toast.error(t('notifications.errorRemoveChannel'));
+      toast.error(t('notifications.errorRemoveChannel'));
       // rollbar.error('RemoveChannel', error);
       setLoading(false);
     }

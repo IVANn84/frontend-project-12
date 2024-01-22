@@ -53,10 +53,11 @@ const Add = () => {
 
       try {
         await socket.newChannel(name);
-        toast('ERERTERTERTERTERTER');
+        toast.success(t('notifications.addChannel'));
         // debugger
         resetForm();
       } catch (error) {
+        toast.error(t('notifications.errorAddChannel'));
       } finally {
         handlerClose();
       }
