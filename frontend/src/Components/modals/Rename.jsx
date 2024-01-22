@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next';
 // import { useRollbar } from '@rollbar/react';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
-import { useSocket } from '../../hooks';
+import { useSocket, useFilter } from '../../hooks';
 
 const Rename = () => {
-  // const filterWords = useFilter();
+  const filterWords = useFilter();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const socket = useSocket();
@@ -40,9 +40,9 @@ const Rename = () => {
         ),
     }),
     onSubmit: async ({ name }) => {
-      // const filteredRename = filterWords(name);
+      const filteredRename = filterWords(name);
       try {
-        await socket.renameChannel(channalId, name);
+        await socket.renameChannel(channalId, filteredRename);
         toast.success(t('notifications.renameChannel'));
         dispatch(modalsActions.closeModal());
       } catch (error) {

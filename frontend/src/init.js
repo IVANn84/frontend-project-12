@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import resources from './locales/index.js';
 import App from './Components/App.jsx';
 import io from 'socket.io-client';
+import FilterProvider from './context/FilterProvider .jsx';
 import SocketProvider from './context/SocketProvider.jsx';
 import { actions as channelsActions } from './slices/channelsSlice.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
@@ -42,13 +43,15 @@ const init = async () => {
   );
   return (
     <Provider store={store}>
-      <SocketProvider socket={socket}>
-        <I18nextProvider i18n={i18n}>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </I18nextProvider>
-      </SocketProvider>
+      <FilterProvider>
+        <SocketProvider socket={socket}>
+          <I18nextProvider i18n={i18n}>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </I18nextProvider>
+        </SocketProvider>
+      </FilterProvider>
     </Provider>
   );
 };

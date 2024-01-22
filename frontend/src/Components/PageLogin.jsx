@@ -7,6 +7,7 @@ import routes from '../hooks/routes.js';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const PageLogin = () => {
   const auth = useAuth();
@@ -34,10 +35,11 @@ const PageLogin = () => {
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
           setAuthFailed(true);
+          toast.error(t('notifications.notАuthorized'));
           inputRef.current.select();
           return;
         }
-        throw error;
+        toast.error(t('notifications.another'));
       }
     },
   });

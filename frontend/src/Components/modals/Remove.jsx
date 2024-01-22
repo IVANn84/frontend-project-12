@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 // import { useRollbar } from '@rollbar/react';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
-import { useSocket } from '../../hooks';
+import { useSocket } from '../../hooks/index.js';
 
 const Remove = () => {
   const { t } = useTranslation();
@@ -15,7 +15,6 @@ const Remove = () => {
   const socket = useSocket();
   const isOpened = useSelector((state) => state.modals.isOpened);
   const channalId = useSelector((state) => state.modals.extra.channalId);
-  // debugger;
   const handleClose = () => dispatch(modalsActions.closeModal());
   const handleRemove = async () => {
     setLoading(true);

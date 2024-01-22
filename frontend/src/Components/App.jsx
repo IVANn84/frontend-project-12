@@ -48,7 +48,7 @@ const App = () => (
           <Route path={routes.NotFoundPage} element={<NotFoundPage />}></Route>
           <Route path={routes.chatSignup} element={<Registration />}></Route>
         </Routes>
-        <ToastContainer position='bottom-center'/>
+        <ToastContainer position="bottom-center" autoClose={2000} />
       </div>
     </BrowserRouter>
   </AuthProvider>

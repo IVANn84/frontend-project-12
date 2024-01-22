@@ -8,13 +8,13 @@ import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
 import { toast } from 'react-toastify';
 // import { useRollbar } from '@rollbar/react';
-import { useSocket } from '../../hooks/index';
+import { useSocket, useFilter } from '../../hooks/index';
 
 const Add = () => {
-  // const filterWords = useFilter();
   const { t } = useTranslation();
   const socket = useSocket();
   const inputRef = useRef(null);
+  const filterWords = useFilter();
   // eslint-disable-next-line arrow-body-style
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
     ({ name }) => name
@@ -49,12 +49,11 @@ const Add = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async ({ name }, { resetForm }) => {
-      // const filteredNameChannel = filterWords(name);
+      const filteredNameChannel = filterWords(name);
 
       try {
-        await socket.newChannel(name);
+        await socket.newChannel(filteredNameChannel);
         toast.success(t('notifications.addChannel'));
-        // debugger
         resetForm();
       } catch (error) {
         toast.error(t('notifications.errorAddChannel'));
