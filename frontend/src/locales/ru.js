@@ -43,7 +43,7 @@ const ru = {
       addChannel: 'Добавить канал',
       removeChannel: 'Удалить канал',
       renameChannel: 'Переименовать канал',
-      remove: 'удалить',
+      remove: 'Удалить',
       send: 'Oтправить',
       cancel: 'Oтменить',
       confirmSure: 'Уверены ?',

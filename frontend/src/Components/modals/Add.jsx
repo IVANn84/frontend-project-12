@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 // import { useRollbar } from '@rollbar/react';
 import { useSocket } from '../../hooks/index';
 
@@ -53,12 +53,10 @@ const Add = () => {
 
       try {
         await socket.newChannel(name);
-
-        // toast.success(t('notifications.addChannel'));
+        toast('ERERTERTERTERTERTER');
+        // debugger
         resetForm();
       } catch (error) {
-        // toast.error(t('notifications.errorAddChannel'));
-        // rollbar.error('AddChannel', error);
       } finally {
         handlerClose();
       }
@@ -68,7 +66,7 @@ const Add = () => {
   return (
     <Modal show={isOpened} centered>
       <Modal.Header closeButton onHide={handlerClose}>
-        <Modal.Title>{t('modal.addChannel')}</Modal.Title>
+        <Modal.Title>{t('modals.addChannel')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -84,21 +82,21 @@ const Add = () => {
               name="name"
               isInvalid={formik.touched.name && formik.errors.name}
             />
-            <Form.Label visuallyHidden>{t('modal.channelName')}</Form.Label>
+            <Form.Label visuallyHidden>{t('modals.channelName')}</Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
           </Form.Group>
           <Modal.Footer>
             <Button variant="secondary" onClick={handlerClose}>
-              {t('modal.send')}
+              {t('modals.cancel')}
             </Button>
             <Button
               type="submit"
               variant="primary"
               disabled={formik.isSubmitting}
             >
-              {t('modal.cancel')}
+              {t('modals.send')}
             </Button>
           </Modal.Footer>
         </Form>

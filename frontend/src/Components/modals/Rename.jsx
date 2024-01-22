@@ -60,7 +60,7 @@ const Rename = () => {
   return (
     <Modal show centered onHide={() => dispatch(modalsActions.closeModal())}>
       <Modal.Header closeButton>
-        <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
+        <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -78,7 +78,7 @@ const Rename = () => {
               isInvalid={formik.errors.name}
             />
             <Form.Label htmlFor="name" visuallyHidden>
-              {t('modal.channelName')}
+              {t('modals.channelName')}
             </Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
@@ -89,14 +89,14 @@ const Rename = () => {
               variant="secondary"
               onClick={() => dispatch(modalsActions.closeModal())}
             >
-              {t('modal.send')}
+              {t('modals.send')}
             </Button>
             <Button
               type="submit"
               variant="primary"
               disabled={formik.isSubmitting}
             >
-              {t('modal.cancel')}
+              {t('modals.cancel')}
             </Button>
           </Modal.Footer>
         </Form>

@@ -33,10 +33,10 @@ const Remove = () => {
   return (
     <Modal show={isOpened} centered>
       <Modal.Header closeButton onHide={handleClose}>
-        <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
+        <Modal.Title>{t('modals.removeChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="lead">{t('modal.confirmSure')}</p>
+        <p className="lead">{t('modals.confirmSure')}</p>
         <div className="d-flex justify-content-end">
           <Button
             className="me-2"
@@ -45,7 +45,7 @@ const Remove = () => {
             onClick={handleClose}
             disabled={loading}
           >
-            {t('modal.cancel')}
+            {t('modals.cancel')}
           </Button>
           <Button
             variant="danger"
@@ -53,7 +53,7 @@ const Remove = () => {
             onClick={handleRemove}
             disabled={loading}
           >
-            {t('modal.remove')}
+            {t('modals.remove')}
           </Button>
         </div>
       </Modal.Body>
