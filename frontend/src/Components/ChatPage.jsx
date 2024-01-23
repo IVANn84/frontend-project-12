@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import { actions as messagesActions } from '../slices/messagesSlice.js';
 import { Spinner } from 'react-bootstrap';
-import ChannelsBox from './ChannelsBox.jsx';
+import ChannelsBox from './channels/ChannelsBox.jsx';
 import getModalComponent from './modals/index.js';
 import ChatBox from './ChatBox.jsx';
 import { useAuth } from '../hooks/index.js';

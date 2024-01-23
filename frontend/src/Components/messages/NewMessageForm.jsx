@@ -3,9 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { useAuth, useSocket } from '../hooks';
+import { useAuth, useSocket } from '../../hooks/index.js';
 import { useSelector } from 'react-redux';
-import SendMessageIcon from '../icons/SendMessagesIcons.jsx';
+import SendMessageIcon from '../../icons/SendMessagesIcons.jsx';
 
 const NewMessageForm = ({ channel }) => {
   const { t } = useTranslation();

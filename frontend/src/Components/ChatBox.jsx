@@ -2,16 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectorsChannels } from '../slices/channelsSlice.js';
 import { selectorsMessage } from '../slices/messagesSlice.js';
-import NewMessageForm from './NewMessageForm.jsx';
+import Message from './messages/Message.jsx';
+import NewMessageForm from './messages/NewMessageForm.jsx';
 import { useTranslation } from 'react-i18next';
-
-const Message = ({ username, body }) => (
-  <div className="text-break mb-2">
-    <b>{username}</b>
-    {': '}
-    {body}
-  </div>
-);
 
 const ChatBox = () => {
   const { t } = useTranslation();
