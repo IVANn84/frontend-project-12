@@ -10,7 +10,9 @@ import SendMessageIcon from '../../icons/SendMessagesIcons.jsx';
 const NewMessageForm = ({ channel }) => {
   const { t } = useTranslation();
   const socket = useSocket();
-  const auth = useAuth();
+  const {
+    loggedIn: { username },
+  } = useAuth();
   const inputRef = useRef(null);
 
   const currentChannelId = useSelector(
@@ -24,12 +26,12 @@ const NewMessageForm = ({ channel }) => {
         socket.newMessage({
           body: messageBody,
           channelId: currentChannelId,
-          username: auth.currentUser,
+          username,
         });
 
         resetForm();
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     },
     validationSchema: yup.object().shape({
