@@ -16,6 +16,7 @@ import Navbar from './Navbar.jsx';
 import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
+
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
   const locattion = useLocation();

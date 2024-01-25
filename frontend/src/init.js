@@ -10,6 +10,12 @@ import FilterProvider from './context/FilterProvider .jsx';
 import SocketProvider from './context/SocketProvider.jsx';
 import { actions as channelsActions } from './slices/channelsSlice.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+
+const rollbarConfig = {
+  accessToken: '34607810623f474b9e09d64f3f48df6f',
+  environment: 'testenv',
+};
 
 const init = async () => {
   const i18n = createInstance();
@@ -42,17 +48,21 @@ const init = async () => {
     )
   );
   return (
-    <Provider store={store}>
-      <FilterProvider>
-        <SocketProvider socket={socket}>
-          <I18nextProvider i18n={i18n}>
-            <React.StrictMode>
-              <App />
-            </React.StrictMode>
-          </I18nextProvider>
-        </SocketProvider>
-      </FilterProvider>
-    </Provider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <FilterProvider>
+            <SocketProvider socket={socket}>
+              <I18nextProvider i18n={i18n}>
+                <React.StrictMode>
+                  <App />
+                </React.StrictMode>
+              </I18nextProvider>
+            </SocketProvider>
+          </FilterProvider>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 
