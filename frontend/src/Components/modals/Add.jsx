@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
 import { toast } from 'react-toastify';
-// import { useRollbar } from '@rollbar/react';
 import { useSocket, useFilter } from '../../hooks/index';
 
 const Add = () => {
@@ -15,14 +14,12 @@ const Add = () => {
   const socket = useSocket();
   const inputRef = useRef(null);
   const filterWords = useFilter();
-  // eslint-disable-next-line arrow-body-style
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
     ({ name }) => name
   );
   const dispath = useDispatch();
   const isOpened = useSelector((state) => state.modals.isOpened);
 
-  // const rollbar = useRollbar();
   const handlerClose = () => dispath(modalsActions.closeModal());
 
   useEffect(() => {

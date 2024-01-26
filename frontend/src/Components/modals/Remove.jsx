@@ -3,14 +3,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-// import { useRollbar } from '@rollbar/react';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
 import { useSocket } from '../../hooks/index.js';
 
 const Remove = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  // const rollbar = useRollbar();
   const dispatch = useDispatch();
   const socket = useSocket();
   const isOpened = useSelector((state) => state.modals.isOpened);
@@ -24,7 +22,6 @@ const Remove = () => {
       dispatch(modalsActions.closeModal());
     } catch (error) {
       toast.error(t('notifications.errorRemoveChannel'));
-      // rollbar.error('RemoveChannel', error);
       setLoading(false);
     }
   };

@@ -11,7 +11,7 @@ const mapping = {
 const getModal = (type) => mapping[type];
 
 const getModalComponent = (type) => {
-  if (type === null) {
+  if (!type) {
     return null;
   }
 

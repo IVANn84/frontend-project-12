@@ -5,7 +5,6 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-// import { useRollbar } from '@rollbar/react';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
 import { useSocket, useFilter } from '../../hooks';
@@ -15,7 +14,6 @@ const Rename = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const socket = useSocket();
-  // const rollbar = useRollbar();
   const inputRef = useRef(null);
   const channalId = useSelector((state) => state.modals.extra.channalId);
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
@@ -47,7 +45,6 @@ const Rename = () => {
         dispatch(modalsActions.closeModal());
       } catch (error) {
         toast.error(t('notifications.errorRenameChannel'));
-        // rollbar.error('RenameChannel', error);
       }
     },
   });
@@ -88,14 +85,14 @@ const Rename = () => {
               variant="secondary"
               onClick={() => dispatch(modalsActions.closeModal())}
             >
-              {t('modals.send')}
+              {t('modals.cancel')}
             </Button>
             <Button
               type="submit"
               variant="primary"
               disabled={formik.isSubmitting}
             >
-              {t('modals.cancel')}
+              {t('modals.send')}
             </Button>
           </Modal.Footer>
         </Form>

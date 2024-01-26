@@ -5,7 +5,6 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
-// import { useRollbar } from '@rollbar/react';
 import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
@@ -13,18 +12,16 @@ import avatarReg from '../assets/avatarReg.jpg';
 
 const Registration = () => {
   const { t } = useTranslation();
-  const auth = useAuth();
+  const { logIn } = useAuth();
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const inputRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation();
-  // const rollbar = useRollbar();
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   const validationSchema = yup.object().shape({
-    // TODO: rewrite to setLocale
     username: yup
       .string()
       .trim()
@@ -60,21 +57,19 @@ const Registration = () => {
           username: values.username,
           password: values.password,
         });
-        auth.logIn(response.data);
+        logIn(response.data);
         navigate(routes.chatPagePath);
-      } catch (err) {
-        // rollbar.error(err);
-        if (!err.isAxiosError) {
-          throw err;
+      } catch (error) {
+        if (!error.isAxiosError) {
+          throw error;
         }
-
-        if (err.response.status === 409) {
+        if (error.response.status === 409) {
           setRegistrationFailed(true);
           inputRef.current.select();
           return;
         }
 
-        throw err;
+        throw error;
       }
     },
   });
