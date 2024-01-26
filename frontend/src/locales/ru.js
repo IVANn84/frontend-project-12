@@ -4,7 +4,7 @@ const ru = {
     password: 'Пароль',
     submit: 'Войти',
     newToChat: 'Нет аккаунта ?',
-    authFailed: 'Неверное имя пользователя или пароль',
+    authFailed: 'Неверные имя пользователя или пароль',
     hexletChat: 'Hexlet Chat',
     logOut: 'Выйти',
 

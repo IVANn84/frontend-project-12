@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions as channelsActions } from '../slices/channelsSlice.js';
-import { actions as messagesActions } from '../slices/messagesSlice.js';
+import { actions as channelsActions } from '../../slices/channelsSlice.js';
+import { actions as messagesActions } from '../../slices/messagesSlice.js';
 import { Spinner } from 'react-bootstrap';
-import ChannelsBox from './channels/ChannelsBox.jsx';
-import getModalComponent from './modals/index.js';
+import ChannelsBox from '../channels/ChannelsBox.jsx';
+import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
-import { useAuth } from '../hooks/index.js';
-import routes from '../hooks/routes.js';
+import { useAuth } from '../../hooks/index.js';
+import routes from '../../hooks/routes.js';
 
 const ChatPage = () => {
   const dispatch = useDispatch();

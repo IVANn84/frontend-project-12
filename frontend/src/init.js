@@ -22,9 +22,6 @@ const init = async () => {
   const options = {
     resources,
     fallbackLng: 'ru',
-    // interpolation: {
-    //   escapeValue: false,
-    // },
   };
   await i18n.use(initReactI18next).init(options);
   const socket = new io();

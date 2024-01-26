@@ -11,16 +11,15 @@ import NotFoundPage from './NotFoundPage.jsx';
 import Registration from './Registration.jsx';
 import AuthProvider from '../context/AuthProvider.jsx';
 import PageLogin from './PageLogin.jsx';
-import ChatPage from './ChatPage.jsx';
+import ChatPage from './chat/ChatPage.jsx';
 import Navbar from './Navbar.jsx';
 import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
-
 const PrivateRoute = ({ children }) => {
-  const auth = useAuth();
+  const { loggedIn } = useAuth();
   const locattion = useLocation();
-  return auth.loggedIn ? (
+  return loggedIn ? (
     children
   ) : (
     <Navigate to="/login" state={{ from: locattion }} />
