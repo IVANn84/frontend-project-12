@@ -24,10 +24,9 @@ const ChatPage = () => {
         });
         const { channels, messages } = data;
 
-        debugger;
         dispatch(channelsActions.addChannels(channels));
         dispatch(messagesActions.addMessages(messages));
-        // setFetching(false);
+        setFetching(false);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
           return;
