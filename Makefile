@@ -10,8 +10,10 @@ start-frontend:
 start-backend:
 	npx start-server 
 
+# start:
+# 	npx start-server
 start:
-	npx start-server
+	make start-backend  & make start-frontend
 
 deploy:
   cd ./frontend && npm run build:deploy
