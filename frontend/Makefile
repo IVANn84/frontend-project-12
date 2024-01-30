@@ -1,8 +1,8 @@
 # install:
 # 	npm ci
 
-# start:
-# 	npm start
+start:
+	npm start
 
 build:
 	npm build
