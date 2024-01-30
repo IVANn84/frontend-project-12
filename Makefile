@@ -22,9 +22,6 @@ build:
 startDev:
 	make start-backend & make start-frontend
 
-start-frontend:
-    make -C frontend start 
-
 start-backend:
     npx start-server 
 
