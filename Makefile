@@ -12,12 +12,10 @@ start-backend:
 
 start:
 	npx start-server
-	# make start-backend  & make start-frontend
 
 deploy:
   cd ./frontend && npm run build:deploy
-# deploy:
-# 	git push origin main
+
 
 build:
-  cd ./frontend &&  npm run build:deploy
+	npm run build
