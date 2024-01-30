@@ -16,6 +16,5 @@ start:
 deploy:
   cd ./frontend && npm run build:deploy
 
-
 build:
 	npm run build
