@@ -4,9 +4,6 @@ lint-frontend:
 install:
 	npm ci && cd ./frontend && npm ci
 
-start-backend:
-	npx start-server  
-
 deploy:
   cd ./frontend && npm run build:deploy
 
