@@ -16,6 +16,8 @@ start:
 
 # deploy:
 #     npm ci && cd ./frontend && npm ci && npm run build:deploy
+deploy:
+	git push origin main
 
 build:
-    cd ./frontend &&  npm run build:deploy
+  cd ./frontend &&  npm run build:deploy
