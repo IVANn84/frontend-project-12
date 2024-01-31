@@ -1,5 +1,5 @@
-import init from './init.js';
 import ReactDOM from 'react-dom/client';
+import init from './init.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 

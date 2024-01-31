@@ -59,7 +59,7 @@ const ru = {
       passwordMatch: 'Пароли должны совпадать',
       uniqueness: 'Должно быть уникальным',
     },
-    
+
     notifications: {
       errMessage: 'Что то пошло не так, при отправке сообщения на сервер',
       another: 'Что то пошло не так',
