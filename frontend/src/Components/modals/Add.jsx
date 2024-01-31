@@ -4,9 +4,9 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
-import { toast } from 'react-toastify';
 import { useSocket, useFilter } from '../../hooks/index';
 
 const Add = () => {
@@ -15,7 +15,7 @@ const Add = () => {
   const inputRef = useRef(null);
   const filterWords = useFilter();
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
-    ({ name }) => name
+    ({ name }) => name,
   );
   const dispath = useDispatch();
   const isOpened = useSelector((state) => state.modals.isOpened);
@@ -40,7 +40,7 @@ const Add = () => {
         .test(
           'is-unique',
           t('validation.uniqueness'),
-          (value) => !existingChannels.includes(value)
+          (value) => !existingChannels.includes(value),
         ),
     }),
     validateOnBlur: false,
