@@ -1,13 +1,13 @@
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import avatar from '../assets/avatar.jpg';
+import { toast } from 'react-toastify';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../hooks/index.js';
-import routes from '../hooks/routes.js';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
+import { useAuth } from '../hooks/index.js';
+import avatar from '../assets/avatar.jpg';
+import routes from '../hooks/routes.js';
 
 const PageLogin = () => {
   const auth = useAuth();
@@ -87,11 +87,9 @@ const PageLogin = () => {
                     required
                   />
                   <Form.Label htmlFor="password">{t('password')}</Form.Label>
-                  {
-                    <Form.Control.Feedback type="invalid" tooltip>
-                      {t('authFailed')}
-                    </Form.Control.Feedback>
-                  }
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {t('validation.authFailed')}
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Button
                   type="submit"
@@ -104,7 +102,8 @@ const PageLogin = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t('newToChat')}</span>{' '}
+                <span>{t('newToChat')}</span>
+                {' '}
                 <Link to="/signup">{t('signup.header')}</Link>
               </div>
             </div>
