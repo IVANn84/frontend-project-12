@@ -1,9 +1,7 @@
-
-const NotFoundPage  = () => (
-    <div>
-      {'NotFoundPage'} content :{'ERROR 404'}
-    </div>
+const NotFoundPage = () => (
+  <div>
+    {'NotFoundPage'} content :{'ERROR 404'}
+  </div>
 );
 
-
-export default NotFoundPage 
+export default NotFoundPage;

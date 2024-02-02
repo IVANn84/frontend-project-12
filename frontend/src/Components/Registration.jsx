@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useAuth } from '../hooks/index.js';
@@ -38,7 +38,7 @@ const Registration = () => {
       .test(
         'confirmPassword',
         'signup.mustMatch',
-        (value, context) => value === context.parent.password
+        (value, context) => value === context.parent.password,
       ),
   });
 
