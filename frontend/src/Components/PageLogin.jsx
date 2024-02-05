@@ -91,7 +91,7 @@ const PageLogin = () => {
                     <Form.Control.Feedback type="invalid" tooltip>
                       {t('validation.authFailed')}
                     </Form.Control.Feedback>
-                  ) }
+                  )}
                   {/* tooltip */}
                 </Form.Group>
                 <Button

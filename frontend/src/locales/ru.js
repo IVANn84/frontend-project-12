@@ -49,9 +49,11 @@ const ru = {
       channelName: 'Имя канала',
     },
 
+    // Неверные имя пользователя или пароль
+
     validation: {
       userExists: 'Такой пользователь уже существует',
-      authFailed: 'Неверные имя пользователя или пароль',
+      authFailed: 'Неверные имя пользователя пароль',
       minMaxsimSymbols: 'От 3 до 20 символов',
       emptyField: 'обязательное поле',
       minLengthPassword: 'Не менее 6 символов',
