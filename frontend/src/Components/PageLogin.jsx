@@ -34,7 +34,7 @@ const PageLogin = () => {
         navigate(location.state.from);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
-          setAuthFailed(true);
+          // setAuthFailed(true);
           toast.error(t('notifications.notАuthorized'));
           inputRef.current.select();
           return;
