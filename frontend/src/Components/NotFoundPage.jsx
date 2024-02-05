@@ -22,10 +22,3 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
-// const NotFoundPage = () => (
-//   <div>
-//     {'NotFoundPage'} content :{'ERROR 404'}
-//   </div>
-// );
-
-// export default NotFoundPage;
