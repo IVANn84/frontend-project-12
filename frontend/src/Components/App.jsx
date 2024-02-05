@@ -5,7 +5,7 @@ import {
   Navigate,
   useLocation,
 } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundPage from './NotFoundPage.jsx';
 import Registration from './Registration.jsx';
@@ -32,21 +32,18 @@ const App = () => (
       <div className="d-flex flex-column h-100">
         <Navbar />
         <Routes>
-          <Route path={routes.chatPageLogin} element={<PageLogin />}></Route>
+          <Route path={routes.chatPageLogin} element={<PageLogin />} />
           <Route
             path={routes.chatPagePath}
-            element={
+            element={(
               <PrivateRoute>
                 <ChatPage />
               </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path={routes.chatPageNoFound}
-            element={<NotFoundPage />}
-          ></Route>
-          <Route path={routes.NotFoundPage} element={<NotFoundPage />}></Route>
-          <Route path={routes.chatSignup} element={<Registration />}></Route>
+            )}
+          />
+          <Route path={routes.chatPageNoFound} element={<NotFoundPage />} />
+          <Route path={routes.NotFoundPage} element={<NotFoundPage />} />
+          <Route path={routes.chatSignup} element={<Registration />} />
         </Routes>
         <ToastContainer position="bottom-center" autoClose={2000} />
       </div>

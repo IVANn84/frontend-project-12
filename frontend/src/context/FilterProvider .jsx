@@ -6,7 +6,7 @@ export const FilterContext = createContext({});
 const FilterProvider = ({ children }) => {
   filter.add(filter.getDictionary('ru'));
 
-  const filterWord = (word) => filter.clean(word);
+  const filterWord = useCallback((word) => filter.clean(word), []);
 
   return (
     <FilterContext.Provider value={filterWord}>

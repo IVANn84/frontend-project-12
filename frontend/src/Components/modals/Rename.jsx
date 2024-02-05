@@ -17,11 +17,10 @@ const Rename = () => {
   const inputRef = useRef(null);
   const channalId = useSelector((state) => state.modals.extra.channalId);
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
-    ({ name }) => name
+    ({ name }) => name,
   );
-  const oldNameChannel =
-    useSelector(selectorsChannels.selectAll).find(({ id }) => id === channalId)
-      ?.name || '';
+  const oldNameChannel = useSelector(selectorsChannels.selectAll).find(({ id }) => id === channalId)
+    ?.name || '';
 
   const formik = useFormik({
     initialValues: { name: oldNameChannel },
@@ -34,7 +33,7 @@ const Rename = () => {
         .test(
           'is-unique',
           'Должно быть уникальным',
-          (value) => !existingChannels.includes(value)
+          (value) => !existingChannels.includes(value),
         ),
     }),
     onSubmit: async ({ name }) => {

@@ -3,11 +3,11 @@ import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { useAuth, useSocket } from '../../hooks/index.js';
 import { useSelector } from 'react-redux';
+import { useAuth, useSocket } from '../../hooks/index.js';
 import SendMessageIcon from '../../icons/SendMessagesIcons.jsx';
 
-const NewMessageForm = ({ channel }) => {
+const NewMessageForm = () => {
   const { t } = useTranslation();
   const socket = useSocket();
   const {
@@ -16,7 +16,7 @@ const NewMessageForm = ({ channel }) => {
   const inputRef = useRef(null);
 
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannelId
+    (state) => state.channels.currentChannelId,
   );
 
   const formik = useFormik({

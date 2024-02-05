@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { selectorsMessage } from '../../slices/messagesSlice.js';
 import Message from '../messages/Message.jsx';
 import NewMessageForm from '../messages/NewMessageForm.jsx';
-import { useTranslation } from 'react-i18next';
 
 const ChatBox = () => {
   const { t } = useTranslation();
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannelId
+    (state) => state.channels.currentChannelId,
   );
 
-  const currentChannel = useSelector((state) =>
-    selectorsChannels.selectById(state, currentChannelId)
+  const currentChannel = useSelector(
+    (state) => selectorsChannels.selectById(state, currentChannelId),
   );
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
-    ({ channelId }) => channelId === currentChannelId
+    ({ channelId }) => channelId === currentChannelId,
   );
 
   return (

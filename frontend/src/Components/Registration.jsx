@@ -1,13 +1,13 @@
+/* eslint operator-linebreak: ["error", "before"] */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
-
 import avatarReg from '../assets/avatarReg.jpg';
 
 const Registration = () => {
@@ -38,7 +38,7 @@ const Registration = () => {
       .test(
         'confirmPassword',
         'signup.mustMatch',
-        (value, context) => value === context.parent.password
+        (value, context) => value === context.parent.password,
       ),
   });
 
@@ -99,8 +99,7 @@ const Registration = () => {
                     id="username"
                     autoComplete="username"
                     isInvalid={
-                      (formik.errors.username && formik.touched.username) ||
-                      registrationFailed
+                      (formik.errors.username && formik.touched.username) || registrationFailed
                     }
                     required
                     ref={inputRef}
@@ -127,8 +126,8 @@ const Registration = () => {
                     id="password"
                     aria-describedby="passwordHelpBlock"
                     isInvalid={
-                      (formik.errors.password && formik.touched.password) ||
-                      registrationFailed
+                      (formik.errors.password && formik.touched.password)
+                      || registrationFailed
                     }
                     required
                     autoComplete="new-password"
@@ -150,9 +149,8 @@ const Registration = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     isInvalid={
-                      (formik.errors.confirmPassword &&
-                        formik.touched.confirmPassword) ||
-                      registrationFailed
+                      (formik.errors.confirmPassword
+                      && formik.touched.confirmPassword) || registrationFailed
                     }
                     required
                     autoComplete="new-password"

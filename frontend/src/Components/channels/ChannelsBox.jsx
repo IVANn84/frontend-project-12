@@ -1,37 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Channel from './Channel.jsx';
-import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { Button } from 'react-bootstrap';
-import Channelicon from '../../icons/Channelicon.jsx';
 import { useTranslation } from 'react-i18next';
+import Channel from './Channel.jsx';
+import Channelicon from '../../icons/Channelicon.jsx';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
-import { actions as channelsActions } from '../../slices/channelsSlice.js';
+import { actions as channelsActions, selectorsChannels } from '../../slices/channelsSlice.js';
 
 const ChannelsBox = () => {
   const { t } = useTranslation();
   const channels = useSelector(selectorsChannels.selectAll);
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannelId
+    (state) => state.channels.currentChannelId,
   );
   const dispatch = useDispatch();
-  const handleAddChannel = () =>
-    dispatch(modalsActions.openModal({ type: 'addChannel' }));
+  const handleAddChannel = () => dispatch(modalsActions.openModal({ type: 'addChannel' }));
 
   const handleChoose = (id) => dispatch(channelsActions.setCurrentChanel(id));
-  const handleRemoveChannel = (id) =>
-    dispatch(
-      modalsActions.openModal({
-        type: 'removeChannel',
-        extra: { channalId: id },
-      })
-    );
-  const handleRenameChannel = (id) =>
-    dispatch(
-      modalsActions.openModal({
-        type: 'renameChannel',
-        extra: { channalId: id },
-      })
-    );
+  const handleRemoveChannel = (id) => dispatch(
+    modalsActions.openModal({
+      type: 'removeChannel',
+      extra: { channalId: id },
+    }),
+  );
+  const handleRenameChannel = (id) => dispatch(
+    modalsActions.openModal({
+      type: 'renameChannel',
+      extra: { channalId: id },
+    }),
+  );
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">

@@ -1,9 +1,11 @@
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions as channelsActions } from '../../slices/channelsSlice.js';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { actions as messagesActions } from '../../slices/messagesSlice.js';
-import { Spinner } from 'react-bootstrap';
+import { actions as channelsActions } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
@@ -11,6 +13,7 @@ import { useAuth } from '../../hooks/index.js';
 import routes from '../../hooks/routes.js';
 
 const ChatPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
   const { getAuthHeader } = useAuth();
@@ -29,13 +32,15 @@ const ChatPage = () => {
         setFetching(false);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
-          return;
+          toast.error(t('notification.notАuthorized'));
+        } else {
+          toast.error(t('notification.another'));
         }
       }
     };
 
     fetchData();
-  }, []);
+  });
 
   return fetching ? (
     <div className="h-100 d-flex justify-content-center align-items-center">
