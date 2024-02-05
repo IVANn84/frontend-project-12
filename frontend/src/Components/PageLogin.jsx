@@ -33,13 +33,17 @@ const PageLogin = () => {
         auth.logIn(response.data);
         navigate(location.state.from);
       } catch (error) {
-        if (error.isAxiosError && error.response.status === 401) {
-          // setAuthFailed(true);
-          toast.error(t('notifications.notАuthorized'));
-          inputRef.current.select();
+        console.error(error);
+        if (!error.isAxiosError) {
+          toast.error(t('errors.unknown'));
           return;
         }
-        toast.error(t('notifications.another'));
+        if (error.response?.status === 401) {
+          setAuthFailed(true);
+          inputRef.current.select();
+        } else {
+          toast.error(t('errors.network'));
+        }
       }
     },
   });

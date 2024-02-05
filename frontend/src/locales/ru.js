@@ -37,6 +37,10 @@ const ru = {
       remove: 'Удалить',
       rename: 'Переименовать',
     },
+    errors: {
+      network: 'Ошибка соединения',
+      unknown: 'Неизвестная ошибка',
+    },
 
     modals: {
       addChannel: 'Добавить канал',
