@@ -4,8 +4,8 @@
 install:
 	npm ci && cd ./frontend && npm ci
 
-# deploy:
-#   cd ./frontend && npm run build:deploy
+deploy:
+	npm ci && cd ./frontend && npm run build:deploy
 
 # build:
 # 	npm run build
