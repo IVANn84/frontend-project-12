@@ -33,7 +33,6 @@ const PageLogin = () => {
         auth.logIn(response.data);
         navigate(location.state.from);
       } catch (error) {
-        setAuthFailed(true);
         if (!error.isAxiosError) {
           toast.error(t('errors.unknown'));
           return;
@@ -96,7 +95,6 @@ const PageLogin = () => {
                       {t('validation.authFailed')}
                     </Form.Control.Feedback>
                   )}
-                  {/* tooltip */}
                 </Form.Group>
                 <Button
                   type="submit"
