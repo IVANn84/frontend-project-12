@@ -38,7 +38,7 @@ const PageLogin = () => {
           toast.error(t('errors.unknown'));
           return;
         }
-        if (error.response?.status === 401) {
+        if (error.response.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
         } else {
