@@ -33,7 +33,7 @@ const PageLogin = () => {
         auth.logIn(response.data);
         navigate(location.state.from);
       } catch (error) {
-        console.error(error);
+        setAuthFailed(true);
         if (!error.isAxiosError) {
           toast.error(t('errors.unknown'));
           return;
