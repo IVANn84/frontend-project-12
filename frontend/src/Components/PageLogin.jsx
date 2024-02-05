@@ -87,11 +87,11 @@ const PageLogin = () => {
                     required
                   />
                   <Form.Label htmlFor="password">{t('password')}</Form.Label>
-                  {authFailed ? (
+                  {authFailed && (
                     <Form.Control.Feedback type="invalid" tooltip>
                       {t('validation.authFailed')}
                     </Form.Control.Feedback>
-                  ) : null}
+                  ) }
                 </Form.Group>
                 <Button
                   type="submit"
