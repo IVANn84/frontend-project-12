@@ -37,6 +37,7 @@ const ru = {
     channels: {
       remove: 'Удалить',
       rename: 'Переименовать',
+      menu: 'Управление каналом',
     },
     errors: {
       network: 'Ошибка соединения',
