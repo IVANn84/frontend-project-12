@@ -76,7 +76,7 @@ const PageLogin = () => {
                     required
                     ref={inputRef}
                   />
-                  <Form.Label htmlFor="password">{t('username')}</Form.Label>
+                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
