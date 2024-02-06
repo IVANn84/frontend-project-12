@@ -30,6 +30,7 @@ const ru = {
     chat: {
       send: 'Сообщение отправлено',
       newMessagePlaceholder: 'Введите сообщение...',
+      newMessage: 'Новое сообщение',
       channels: 'Каналы',
     },
 
@@ -52,8 +53,6 @@ const ru = {
       confirmSure: 'Уверены ?',
       channelName: 'Имя канала',
     },
-
-    // Неверные имя пользователя или пароль
 
     validation: {
       userExists: 'Такой пользователь уже существует',

@@ -62,7 +62,7 @@ const NewMessageForm = () => {
             ref={inputRef}
             name="messageBody"
             autoComplete="off"
-            aria-label={t('newMessage')}
+            aria-label={t('chat.newMessage')}
             placeholder={t('chat.newMessagePlaceholder')}
             className="border-0 p-0 ps-2"
             onChange={formik.handleChange}
