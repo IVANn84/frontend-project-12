@@ -4,10 +4,11 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useAuth, useSocket } from '../../hooks/index.js';
+import { useAuth, useFilter, useSocket } from '../../hooks/index.js';
 import SendMessageIcon from '../../icons/SendMessagesIcons.jsx';
 
 const NewMessageForm = () => {
+  const filterWords = useFilter();
   const { t } = useTranslation();
   const socket = useSocket();
   const {
@@ -24,7 +25,7 @@ const NewMessageForm = () => {
     onSubmit: ({ messageBody }, { resetForm }) => {
       try {
         socket.newMessage({
-          body: messageBody,
+          body: filterWords(messageBody),
           channelId: currentChannelId,
           username,
         });
