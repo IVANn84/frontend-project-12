@@ -1,17 +1,22 @@
-import { createContext, useMemo, useTransition, useCallback } from 'react';
+import {
+  createContext, useMemo, useTransition, useCallback,
+} from 'react';
+import { toast } from 'react-toastify';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
-  // const { t } = useTransition();
+  const { t } = useTransition();
 
-  const newMessage = async (messageData) => {
-    socket.emit('newMessage', messageData, (error, response) => {
-      // if (error) {
-      //   throw new Error(error);
-      //   // toast.error('ПИЗДЕЦ!!!');
-      // }
-    });
-  };
+  const newMessage = useCallback(
+    async (messageData) => {
+      socket.emit('newMessage', messageData, (response) => {
+        if (response.status !== 'ok') {
+          toast.error(t('notifications.errMessage'));
+        }
+      });
+    },
+    [socket, t],
+  );
 
   const newChannel = useCallback(
     (newNameChannel) => {
@@ -24,14 +29,14 @@ const SocketProvider = ({ socket, children }) => {
     (channelId) => {
       socket.emit('removeChannel', { id: channelId });
     },
-    [socket]
+    [socket],
   );
 
   const renameChannel = useCallback(
     (channelId, newNameChannel) => {
       socket.emit('renameChannel', { id: channelId, name: newNameChannel });
     },
-    [socket]
+    [socket],
   );
 
   const context = useMemo(() => ({
@@ -39,7 +44,7 @@ const SocketProvider = ({ socket, children }) => {
     newChannel,
     removeChannel,
     renameChannel,
-  }));
+  }), [newMessage, newChannel, removeChannel, renameChannel]);
   return (
     <SocketContext.Provider value={context}>{children}</SocketContext.Provider>
   );
