@@ -41,7 +41,7 @@ const Channel = ({
         <Button
           type="button"
           key={channel.id}
-          className="w-100 rounded-0 text-start text-truncate"
+          className="w-100 rounded-0 text-start "
           onClick={() => handleChoose(channel.id)}
           variant={variant}
         >

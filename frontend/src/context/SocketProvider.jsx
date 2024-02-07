@@ -1,9 +1,8 @@
-import { createContext, useMemo, useTransition } from 'react';
-import { useCallback } from 'react';
+import { createContext, useMemo, useTransition, useCallback } from 'react';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
-  const { t } = useTransition();
+  // const { t } = useTransition();
 
   const newMessage = async (messageData) => {
     socket.emit('newMessage', messageData, (error, response) => {
@@ -18,7 +17,7 @@ const SocketProvider = ({ socket, children }) => {
     (newNameChannel) => {
       socket.emit('newChannel', { name: newNameChannel });
     },
-    [socket]
+    [socket],
   );
 
   const removeChannel = useCallback(

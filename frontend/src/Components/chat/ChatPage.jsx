@@ -9,14 +9,14 @@ import { actions as channelsActions } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
-import { useAuth } from '../../hooks/index.js';
 import routes from '../../hooks/routes.js';
+import getAuthHeader from '../api/getAuthHeader.js';
 
 const ChatPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
-  const { getAuthHeader } = useAuth();
+  // const { getAuthHeader } = useAuth();
   const type = useSelector((state) => state.modals.type);
 
   useEffect(() => {
