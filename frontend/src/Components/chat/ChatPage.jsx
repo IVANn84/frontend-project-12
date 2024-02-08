@@ -12,14 +12,32 @@ import ChatBox from './ChatBox.jsx';
 import routes from '../../hooks/routes.js';
 import getAuthHeader from '../api/getAuthHeader.js';
 
+import { useApi, useSocket } from '../../hooks/index.js';
+
 const ChatPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
-  // const { getAuthHeader } = useAuth();
   const type = useSelector((state) => state.modals.type);
+  const {
+    addMessage, newChannel, removeChannel, renameChannel,
+  } = useApi();
+  const { socket } = useSocket();
 
   useEffect(() => {
+    const f = () => {
+      socket.on('newMessage', (payload) => addMessage(payload));
+      socket.on('newChannel', (payload) => newChannel(payload));
+      socket.on('removeChannel', ({ id }) => removeChannel(id));
+      socket.on('renameChannel', (channel) => renameChannel(channel));
+      return () => {
+        socket.off('newMessage', addMessage);
+        socket.off('newChannel', newChannel);
+        socket.off('removeChannel', removeChannel);
+        socket.off('renameChannel', renameChannel);
+      };
+    };
+
     const fetchData = async () => {
       try {
         const { data } = await axios.get(routes.usersPath(), {
@@ -38,7 +56,7 @@ const ChatPage = () => {
         }
       }
     };
-
+    f();
     fetchData();
   });
 

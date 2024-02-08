@@ -25,14 +25,6 @@ const AuthProvider = ({ children }) => {
     [logIn, logOut, loggedIn],
   );
 
-  // const getAuthHeader = () => {
-  //   const userId = JSON.parse(localStorage.getItem('userId'));
-  //   if (userId && userId.token) {
-  //     return { Authorization: `Bearer ${userId.token}` };
-  //   }
-  //   return {};
-  // };
-
   return (
     <authContext.Provider value={context}>{children}</authContext.Provider>
   );
