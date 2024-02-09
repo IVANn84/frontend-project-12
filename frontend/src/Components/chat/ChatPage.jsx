@@ -25,7 +25,7 @@ const ChatPage = () => {
   const { socket } = useSocket();
 
   useEffect(() => {
-    const getUpdateDateChanenels = () => {
+    const getUpdateChanenels = () => {
       socket.on('newMessage', (payload) => addMessage(payload));
       socket.on('newChannel', (payload) => newChannel(payload));
       socket.on('removeChannel', ({ id }) => removeChannel(id));
@@ -56,7 +56,7 @@ const ChatPage = () => {
         }
       }
     };
-    getUpdateDateChanenels();
+    getUpdateChanenels();
     fetchData();
   });
 

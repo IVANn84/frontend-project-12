@@ -6,3 +6,31 @@
 
 ### Example using Application:
 [https://chat-slack-dbel.onrender.com/login](https://chat-slack-dbel.onrender.com)https://chat-slack-dbel.onrender.com
+
+# Chat Hexlet:
+
+## **Description:**
+The final Hexlet training project. A simple version of Slack chat. Allows a different number of users to exchange messages. supports exchange across multiple channels.
+
+## **Installation:**
+1. Clone the project:
+
+2. Install dependencies:
+
+ ```bash
+ make install
+ ```
+3. Starting:
+ ```bash
+ make startDev
+ ```
+
+ ## **Using technologies:**
+
+ 1. React
+ 2. React-bootstrap
+ 3. React-redux
+ 4. React-i18next
+ 5. React-router
+ 6. Socket.io-client
+ 7. Axios

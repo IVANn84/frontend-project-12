@@ -23,11 +23,6 @@ const SocketProvider = ({ children }) => {
     [socket, t],
   );
 
-  // const newChannel = (newNameChannel) => {
-  //   socket.emitWithAck('newChannel', { name: newNameChannel });
-  //   dispatch(channelsActions.addChannel(newNameChannel));
-  //   return dispatch(channelsActions.setCurrentChanel(newNameChannel.id));
-  // });
   const newChannel = useCallback(async (newNameChannel) => {
     const { data } = await socket.emitWithAck('newChannel', {
       name: newNameChannel,
@@ -60,6 +55,7 @@ const SocketProvider = ({ children }) => {
     }),
     [socket, newMessage, newChannel, removeChannel, renameChannel],
   );
+
   return (
     <SocketContext.Provider value={context}>{children}</SocketContext.Provider>
   );

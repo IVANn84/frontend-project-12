@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { authContext } from '../context/AuthProvider.jsx';
-import { SocketContext } from '../context/SocketProvider.jsx';
-import { FilterContext } from '../context/FilterProvider .jsx';
-import { apiContext } from '../context/ApiProvider .jsx';
+import { authContext } from '../providers/AuthProvider.jsx';
+import { SocketContext } from '../providers/SocketProvider.jsx';
+import { FilterContext } from '../providers/FilterProvider .jsx';
+import { apiContext } from '../providers/ApiProvider .jsx';
 
 export const useAuth = () => useContext(authContext);
 export const useSocket = () => useContext(SocketContext);
