@@ -2,7 +2,6 @@ import { createInstance } from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import React from 'react';
 import { Provider } from 'react-redux';
-// import io from 'socket.io-client';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import store from './slices/index.js';
 import resources from './locales/index.js';
@@ -23,8 +22,6 @@ const init = async () => {
     fallbackLng: 'ru',
   };
   await i18n.use(initReactI18next).init(options);
-
-  // const socket = io();
 
   return (
     <RollbarProvider config={rollbarConfig}>

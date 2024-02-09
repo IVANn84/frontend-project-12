@@ -20,17 +20,7 @@ const SocketProvider = ({ children }) => {
     [socket, t],
   );
 
-  const newChannel = useCallback(
-    (newNameChannel) => {
-      socket.emit('newChannel', { name: newNameChannel }, ({ status }) => {
-        if (status === 'ok') {
-          return;
-        }
-        console.log(0);
-      });
-    },
-    [socket],
-  );
+  const newChannel = useCallback((newNameChannel) => socket.emitWithAck('newChannel', { name: newNameChannel }), [socket]);
 
   const removeChannel = useCallback(
     (channelId) => {
