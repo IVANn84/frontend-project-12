@@ -3,10 +3,13 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 import io from 'socket.io-client';
+import { useDispatch } from 'react-redux';
+import { actions as channelsActions } from '../slices/channelsSlice.js';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ children }) => {
   const { t } = useTransition();
+  const dispatch = useDispatch();
   const socket = io();
 
   const newMessage = useCallback(
@@ -20,7 +23,18 @@ const SocketProvider = ({ children }) => {
     [socket, t],
   );
 
-  const newChannel = useCallback((newNameChannel) => socket.emitWithAck('newChannel', { name: newNameChannel }), [socket]);
+  // const newChannel = (newNameChannel) => {
+  //   socket.emitWithAck('newChannel', { name: newNameChannel });
+  //   dispatch(channelsActions.addChannel(newNameChannel));
+  //   return dispatch(channelsActions.setCurrentChanel(newNameChannel.id));
+  // });
+  const newChannel = useCallback(async (newNameChannel) => {
+    const { data } = await socket.emitWithAck('newChannel', {
+      name: newNameChannel,
+    });
+    dispatch(channelsActions.addChannel(data));
+    dispatch(channelsActions.setCurrentChanel(data.id));
+  }, [dispatch, socket]);
 
   const removeChannel = useCallback(
     (channelId) => {
