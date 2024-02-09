@@ -14,10 +14,11 @@ const Add = () => {
   const socket = useSocket();
   const inputRef = useRef(null);
   const filterWords = useFilter();
+  const dispath = useDispatch();
+
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
     ({ name }) => name,
   );
-  const dispath = useDispatch();
   const isOpened = useSelector((state) => state.modals.isOpened);
 
   const handlerClose = () => dispath(modalsActions.closeModal());

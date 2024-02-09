@@ -16,6 +16,7 @@ const ChannelsBox = () => {
   const handleAddChannel = () => dispatch(modalsActions.openModal({ type: 'addChannel' }));
 
   const handleChoose = (id) => dispatch(channelsActions.setCurrentChanel(id));
+
   const handleRemoveChannel = (id) => dispatch(
     modalsActions.openModal({
       type: 'removeChannel',

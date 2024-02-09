@@ -13,7 +13,10 @@ const ApiProvider = ({ children }) => {
   );
 
   const newChannel = useCallback(
-    (payload) => dispatch(channelsActions.addChannel(payload)),
+    (payload) => {
+      dispatch(channelsActions.addChannel(payload));
+      return dispatch(channelsActions.setCurrentChanel(payload.id));
+    },
     [dispatch],
   );
 
