@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundPage from './NotFoundPage.jsx';
 import Registration from './Registration.jsx';
-import AuthProvider from '../context/AuthProvider.jsx';
+import AuthProvider from '../providers/AuthProvider.jsx';
 import PageLogin from './PageLogin.jsx';
 import ChatPage from './chat/ChatPage.jsx';
 import Navbar from './Navbar.jsx';

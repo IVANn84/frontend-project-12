@@ -6,9 +6,9 @@ import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import store from './slices/index.js';
 import resources from './locales/index.js';
 import App from './Components/App.jsx';
-import FilterProvider from './context/FilterProvider .jsx';
-import SocketProvider from './context/SocketProvider.jsx';
-import ApiProvider from './context/ApiProvider .jsx';
+import FilterProvider from './providers/FilterProvider .jsx';
+import SocketProvider from './providers/SocketProvider.jsx';
+import ApiProvider from './providers/ApiProvider .jsx';
 
 const rollbarConfig = {
   accessToken: '34607810623f474b9e09d64f3f48df6f',
