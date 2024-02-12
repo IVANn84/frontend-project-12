@@ -6,6 +6,7 @@ const ru = {
     newToChat: 'Нет аккаунта ?',
     hexletChat: 'Hexlet Chat',
     logOut: 'Выйти',
+    alt: 'Изображение',
 
     signup: {
       required: 'Обязательное поле',

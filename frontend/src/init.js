@@ -11,7 +11,7 @@ import SocketProvider from './providers/SocketProvider.jsx';
 import ApiProvider from './providers/ApiProvider .jsx';
 
 const rollbarConfig = {
-  accessToken: '34607810623f474b9e09d64f3f48df6f',
+  accessToken: process.env.REACT_APP_ROLLBAR_CODE,
   environment: 'testenv',
 };
 

@@ -54,11 +54,7 @@ const PageLogin = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img
-                  src={avatar}
-                  className="rounded-circle"
-                  alt="Изображение"
-                />
+                <img src={avatar} className="rounded-circle" alt={t('alt')} />
               </div>
               <Form
                 onSubmit={formik.handleSubmit}
