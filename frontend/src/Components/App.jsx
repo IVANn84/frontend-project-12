@@ -41,11 +41,10 @@ const App = () => (
               </PrivateRoute>
             )}
           />
-          <Route path={routes.chatPageNoFound} element={<NotFoundPage />} />
-          <Route path={routes.NotFoundPage} element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
           <Route path={routes.chatSignup} element={<Registration />} />
         </Routes>
-        <ToastContainer position="bottom-center" autoClose={2000} />
+        <ToastContainer position="bottom-right" autoClose={2000} />
       </div>
     </BrowserRouter>
   </AuthProvider>

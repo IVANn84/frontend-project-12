@@ -6,6 +6,5 @@ export default {
   usersPath: () => [apiPatch, 'data'].join('/'),
   chatPagePath: '/',
   chatPageLogin: '/login',
-  chatPageNoFound: '*',
   chatSignup: '/signup',
 };

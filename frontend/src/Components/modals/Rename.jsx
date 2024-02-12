@@ -30,11 +30,6 @@ const Rename = () => {
         .required('обязательное поле')
         .min(3, 'минимум 3 символа')
         .max(20, 'максимум 20 символов')
-        // .test(
-        //   'is-unique',
-        //   'Должно быть уникальным',
-        //   (value) => !existingChannels.includes(value),
-        // ),
         .notOneOf(existingChannels, 'Должно быть уникальным'),
     }),
     onSubmit: async ({ name }) => {

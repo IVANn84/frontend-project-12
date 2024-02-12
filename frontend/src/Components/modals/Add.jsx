@@ -35,6 +35,7 @@ const Add = () => {
     validationSchema: yup.object().shape({
       name: yup
         .string()
+        .trim()
         .required(t('validation.emptyField'))
         .min(3, t('validation.minMaxsimSymbols'))
         .max(20, t('validation.minMaxsimSymbols'))
