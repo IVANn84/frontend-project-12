@@ -4,6 +4,9 @@
 ### Code Climate:
 [![Maintainability](https://api.codeclimate.com/v1/badges/a761f1869fa461dcc5b4/maintainability)](https://codeclimate.com/github/IVANn84/frontend-project-12/maintainability)
 
+### GitHub Actions:
+[![Github Actions](https://github.com/IVANn84/frontend-project-12/actions/workflows/Github%20Actions.yml/badge.svg)](https://github.com/IVANn84/frontend-project-12/actions/workflows/Github%20Actions.yml)
+
 ### Example using Application:
 [https://chat-slack-dbel.onrender.com/login](https://chat-slack-dbel.onrender.com)https://chat-slack-dbel.onrender.com
 
