@@ -1,10 +1,9 @@
-name: my Actions
+name: myActions
 
 # Trigger the workflow on push or pull request
 on:
   - push
-  - npm
-
+  
 jobs:
   build:
     # The type of machine to run the job on
