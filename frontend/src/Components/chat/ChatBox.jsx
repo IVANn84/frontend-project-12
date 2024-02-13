@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { animateScroll } from 'react-scroll';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
 import { selectorsMessage } from '../../slices/messagesSlice.js';
 import Message from '../messages/Message.jsx';
@@ -19,6 +20,11 @@ const ChatBox = () => {
   const messages = useSelector(selectorsMessage.selectAll).filter(
     ({ channelId }) => channelId === currentChannelId,
   );
+
+  useEffect(() => {
+    const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
+    animateScroll.scrollToBottom(argument);
+  }, [messages.length]);
 
   return (
     <div className="d-flex flex-column h-100">

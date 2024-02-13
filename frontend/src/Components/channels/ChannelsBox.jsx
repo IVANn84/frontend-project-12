@@ -24,7 +24,7 @@ const ChannelsBox = () => {
   const lastChannelId = useSelector(selectorsChannels.selectAll).at(-1).id;
   // debugger
   useEffect(() => {
-    const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
+    const argument = { containerId: 'channels-box', delay: 0, duration: 0 };
     if (currentChannelId === defaultChannel) {
       animateScroll.scrollToTop(argument);
     } if (currentChannelId === lastChannelId) {
