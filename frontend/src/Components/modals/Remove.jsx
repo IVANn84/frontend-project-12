@@ -18,7 +18,6 @@ const Remove = () => {
     setLoading(true);
     try {
       socket.removeChannel(channalId);
-      // debugger;
       toast.success(t('notifications.removeChannel'));
       dispatch(modalsActions.closeModal());
     } catch (error) {

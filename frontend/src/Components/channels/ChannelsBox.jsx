@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { animateScroll } from 'react-scroll';
 import Channel from './Channel.jsx';
 import Channelicon from '../../icons/Channelicon.jsx';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
@@ -9,10 +11,27 @@ import { actions as channelsActions, selectorsChannels } from '../../slices/chan
 const ChannelsBox = () => {
   const { t } = useTranslation();
   const channels = useSelector(selectorsChannels.selectAll);
+  const dispatch = useDispatch();
+
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
   );
-  const dispatch = useDispatch();
+
+  const defaultChannel = useSelector(
+    (state) => state.channels.currentDefaultChannel,
+  );
+
+  const lastChannelId = useSelector(selectorsChannels.selectAll).at(-1).id;
+  // debugger
+  useEffect(() => {
+    const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
+    if (currentChannelId === defaultChannel) {
+      animateScroll.scrollToTop(argument);
+    } if (currentChannelId === lastChannelId) {
+      animateScroll.scrollToBottom(argument);
+    }
+  }, [currentChannelId, defaultChannel, lastChannelId]);
+
   const handleAddChannel = () => dispatch(modalsActions.openModal({ type: 'addChannel' }));
 
   const handleChoose = (id) => dispatch(channelsActions.setCurrentChanel(id));
