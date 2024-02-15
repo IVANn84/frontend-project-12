@@ -6,23 +6,23 @@ export const authContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('userId'));
-  const [loggedIn, setLoggedIn] = useState(
+  const [user, setUser] = useState(
     currentUser ? { username: currentUser.username } : null,
   );
 
   const logIn = useCallback((userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
-    setLoggedIn({ username: userData.username });
+    setUser({ username: userData.username });
   }, []);
 
   const logOut = useCallback(() => {
     localStorage.removeItem('userId');
-    setLoggedIn(null);
+    setUser(null);
   }, []);
 
   const context = useMemo(
-    () => ({ logIn, logOut, loggedIn }),
-    [logIn, logOut, loggedIn],
+    () => ({ logIn, logOut, user }),
+    [logIn, logOut, user],
   );
 
   return (

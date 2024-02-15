@@ -17,13 +17,9 @@ import { useAuth } from '../hooks/index.js';
 import routes from '../hooks/routes.js';
 
 const PrivateRoute = ({ children }) => {
-  const { loggedIn } = useAuth();
+  const { user } = useAuth();
   const locattion = useLocation();
-  return loggedIn ? (
-    children
-  ) : (
-    <Navigate to="/login" state={{ from: locattion }} />
-  );
+  return user ? children : <Navigate to="/login" state={{ from: locattion }} />;
 };
 
 const App = () => (

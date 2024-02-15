@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/index.js';
 
 const Navbar = () => {
-  const { logOut, loggedIn } = useAuth();
+  const { logOut, user } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ const Navbar = () => {
         <BootstrapNavbar.Brand as={Link} to="/">
           {t('hexletChat')}
         </BootstrapNavbar.Brand>
-        {!!loggedIn && <Button onClick={logOut}>{t('logOut')}</Button>}
+        {!!user && <Button onClick={logOut}>{t('logOut')}</Button>}
       </div>
     </BootstrapNavbar>
   );

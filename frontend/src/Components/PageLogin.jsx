@@ -105,7 +105,7 @@ const PageLogin = () => {
               <div className="text-center">
                 <span>{t('newToChat')}</span>
                 {' '}
-                <Link to="/signup">{t('signup.header')}</Link>
+                <Link to={routes.chatSignup}>{t('signup.header')}</Link>
               </div>
             </div>
           </div>

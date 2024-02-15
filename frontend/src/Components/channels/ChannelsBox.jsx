@@ -18,7 +18,6 @@ const ChannelsBox = () => {
   );
 
   const lastChannelId = useSelector(selectorsChannels.selectAll).at(-1).id;
-  // debugger
   useEffect(() => {
     const defaultChannel = 1;
     const argument = { containerId: 'channels-box', delay: 0, duration: 0 };

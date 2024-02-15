@@ -12,7 +12,7 @@ const NewMessageForm = () => {
   const { t } = useTranslation();
   const socket = useSocket();
   const {
-    loggedIn: { username },
+    user: { username },
   } = useAuth();
   const inputRef = useRef(null);
 
