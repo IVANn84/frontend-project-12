@@ -17,20 +17,17 @@ const ChannelsBox = () => {
     (state) => state.channels.currentChannelId,
   );
 
-  const defaultChannel = useSelector(
-    (state) => state.channels.currentDefaultChannel,
-  );
-
   const lastChannelId = useSelector(selectorsChannels.selectAll).at(-1).id;
   // debugger
   useEffect(() => {
+    const defaultChannel = 1;
     const argument = { containerId: 'channels-box', delay: 0, duration: 0 };
     if (currentChannelId === defaultChannel) {
       animateScroll.scrollToTop(argument);
     } if (currentChannelId === lastChannelId) {
       animateScroll.scrollToBottom(argument);
     }
-  }, [currentChannelId, defaultChannel, lastChannelId]);
+  }, [currentChannelId, lastChannelId]);
 
   const handleAddChannel = () => dispatch(modalsActions.openModal({ type: 'addChannel' }));
 

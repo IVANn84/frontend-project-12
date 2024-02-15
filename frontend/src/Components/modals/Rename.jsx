@@ -32,6 +32,8 @@ const Rename = () => {
         .max(20, 'максимум 20 символов')
         .notOneOf(existingChannels, 'Должно быть уникальным'),
     }),
+    validateOnBlur: false,
+    validateOnChange: false,
     onSubmit: async ({ name }) => {
       const filteredRename = filterWords(name);
       try {
