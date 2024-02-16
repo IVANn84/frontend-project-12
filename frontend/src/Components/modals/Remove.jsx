@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { actions as modalsActions } from '../../slices/modalsSlice.js';
+import { closeModal } from '../../slices/modalsSlice.js';
 import { useSocket } from '../../hooks/index.js';
 
 const Remove = () => {
@@ -13,13 +13,13 @@ const Remove = () => {
   const socket = useSocket();
   const isOpened = useSelector((state) => state.modals.isOpened);
   const channalId = useSelector((state) => state.modals.extra.channalId);
-  const handleClose = () => dispatch(modalsActions.closeModal());
+  const handleClose = () => dispatch(closeModal());
   const handleRemove = async () => {
     setLoading(true);
     try {
       socket.removeChannel(channalId);
       toast.success(t('notifications.removeChannel'));
-      dispatch(modalsActions.closeModal());
+      dispatch(closeModal());
     } catch (error) {
       toast.error(t('notifications.errorRemoveChannel'));
       setLoading(false);

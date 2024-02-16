@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { animateScroll } from 'react-scroll';
 import Channel from './Channel.jsx';
 import Channelicon from '../../icons/Channelicon.jsx';
-import { actions as modalsActions } from '../../slices/modalsSlice.js';
-import { actions as channelsActions, selectorsChannels } from '../../slices/channelsSlice.js';
+import { openModal } from '../../slices/modalsSlice.js';
+import { selectorsChannels, setCurrentChannel } from '../../slices/channelsSlice.js';
 
 const ChannelsBox = () => {
   const { t } = useTranslation();
@@ -28,18 +28,18 @@ const ChannelsBox = () => {
     }
   }, [currentChannelId, lastChannelId]);
 
-  const handleAddChannel = () => dispatch(modalsActions.openModal({ type: 'addChannel' }));
+  const handleAddChannel = () => dispatch(openModal({ type: 'addChannel' }));
 
-  const handleChoose = (id) => dispatch(channelsActions.setCurrentChanel(id));
+  const handleChoose = (id) => dispatch(setCurrentChannel(id));
 
   const handleRemoveChannel = (id) => dispatch(
-    modalsActions.openModal({
+    openModal({
       type: 'removeChannel',
       extra: { channalId: id },
     }),
   );
   const handleRenameChannel = (id) => dispatch(
-    modalsActions.openModal({
+    openModal({
       type: 'renameChannel',
       extra: { channalId: id },
     }),

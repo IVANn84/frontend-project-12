@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
-import { actions as modalsActions } from '../../slices/modalsSlice.js';
+import { closeModal } from '../../slices/modalsSlice.js';
 import { useSocket, useFilter } from '../../hooks/index';
 
 const Add = () => {
@@ -21,7 +21,7 @@ const Add = () => {
   );
   const isOpened = useSelector((state) => state.modals.isOpened);
 
-  const handlerClose = () => dispath(modalsActions.closeModal());
+  const handlerClose = () => dispath(closeModal());
 
   useEffect(() => {
     if (inputRef.current) {

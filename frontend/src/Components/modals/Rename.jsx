@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { selectorsChannels } from '../../slices/channelsSlice.js';
-import { actions as modalsActions } from '../../slices/modalsSlice.js';
+import { closeModal } from '../../slices/modalsSlice.js';
 import { useSocket, useFilter } from '../../hooks';
 
 const Rename = () => {
@@ -39,7 +39,7 @@ const Rename = () => {
       try {
         await socket.renameChannel(channalId, filteredRename);
         toast.success(t('notifications.renameChannel'));
-        dispatch(modalsActions.closeModal());
+        dispatch(closeModal());
       } catch (error) {
         toast.error(t('notifications.errorRenameChannel'));
       }
@@ -51,7 +51,7 @@ const Rename = () => {
   }, []);
 
   return (
-    <Modal show centered onHide={() => dispatch(modalsActions.closeModal())}>
+    <Modal show centered onHide={() => dispatch(closeModal())}>
       <Modal.Header closeButton>
         <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
       </Modal.Header>
@@ -80,7 +80,7 @@ const Rename = () => {
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={() => dispatch(modalsActions.closeModal())}
+              onClick={() => dispatch(closeModal())}
             >
               {t('modals.cancel')}
             </Button>

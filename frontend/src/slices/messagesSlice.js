@@ -12,7 +12,7 @@ const messagesSlice = createSlice({
     addMessage: messagesAdapter.addOne,
   },
 });
-export const { actions } = messagesSlice;
+export const { addMessage, addMessages } = messagesSlice.actions;
 export const selectorsMessage = messagesAdapter.getSelectors(
   (state) => state.messages,
 );
