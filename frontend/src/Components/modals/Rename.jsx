@@ -27,10 +27,10 @@ const Rename = () => {
     validationSchema: yup.object().shape({
       name: yup
         .string()
-        .required('обязательное поле')
-        .min(3, 'минимум 3 символа')
-        .max(20, 'максимум 20 символов')
-        .notOneOf(existingChannels, 'Должно быть уникальным'),
+        .required(t('validation.required'))
+        .min(3, t('validation.min'))
+        .max(20, t('validation.max'))
+        .notOneOf(existingChannels, t('validation.notOneOf')),
     }),
     validateOnBlur: false,
     validateOnChange: false,

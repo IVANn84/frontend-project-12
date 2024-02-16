@@ -64,6 +64,10 @@ const ru = {
       minLengthPassword: 'Не менее 6 символов',
       passwordMatch: 'Пароли должны совпадать',
       uniqueness: 'Должно быть уникальным',
+      required: 'обязательное поле',
+      min: 'минимум 3 символа',
+      max: 'максимум 20 символов',
+      notOneOf: 'Должно быть уникальным',
     },
 
     notifications: {

@@ -4,13 +4,18 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import io from 'socket.io-client';
+import filter from 'leo-profanity';
 import store from './slices/index.js';
 import resources from './locales/index.js';
 import App from './Components/App.jsx';
-import FilterProvider from './providers/FilterProvider .jsx';
+import FilterProvider from './providers/FilterProvider.jsx';
 import SocketProvider from './providers/SocketProvider.jsx';
 import { addMessage } from './slices/messagesSlice.js';
-import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice.js';
+import {
+  addChannel,
+  removeChannel,
+  renameChannel,
+} from './slices/channelsSlice.js';
 
 const rollbarConfig = {
   accessToken: process.env.REACT_APP_ROLLBAR_CODE,
@@ -25,15 +30,20 @@ const init = async () => {
   };
   await i18n.use(initReactI18next).init(options);
 
+  filter.add(filter.getDictionary('ru'));
+  filter.add(filter.getDictionary('en'));
+
   const socket = io();
 
   socket.on('newMessage', (payload) => store.dispatch(addMessage(payload)));
   socket.on('newChannel', (payload) => store.dispatch(addChannel(payload)));
   socket.on('removeChannel', (channel) => store.dispatch(removeChannel(channel.id)));
-  socket.on('renameChannel', (channel) => store.dispatch(renameChannel({
-    id: channel.id,
-    changes: { name: channel.name },
-  })));
+  socket.on('renameChannel', (channel) => store.dispatch(
+    renameChannel({
+      id: channel.id,
+      changes: { name: channel.name },
+    }),
+  ));
 
   return (
     <RollbarProvider config={rollbarConfig}>
