@@ -22,7 +22,7 @@ const Remove = () => {
     setLoading(true);
     try {
       if (channalId !== currentChannelId) {
-        toast.error(t('notifications.errorCurrentChanel'));
+        // toast.error(t('notifications.errorCurrentChanel'));
         dispatch(closeModal());
       } else {
         socket.removeChannel(channalId);
