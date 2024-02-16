@@ -13,13 +13,22 @@ const Remove = () => {
   const socket = useSocket();
   const isOpened = useSelector((state) => state.modals.isOpened);
   const channalId = useSelector((state) => state.modals.extra.channalId);
+  const currentChannelId = useSelector(
+    (state) => state.channels.currentChannelId,
+  );
+  // debugger;
   const handleClose = () => dispatch(closeModal());
   const handleRemove = async () => {
     setLoading(true);
     try {
-      socket.removeChannel(channalId);
-      toast.success(t('notifications.removeChannel'));
-      dispatch(closeModal());
+      if (channalId !== currentChannelId) {
+        toast.error(t('notifications.errorCurrentChanel'));
+        dispatch(closeModal());
+      } else {
+        socket.removeChannel(channalId);
+        toast.success(t('notifications.removeChannel'));
+        dispatch(closeModal());
+      }
     } catch (error) {
       toast.error(t('notifications.errorRemoveChannel'));
       setLoading(false);
