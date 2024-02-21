@@ -10,6 +10,14 @@ const AuthProvider = ({ children }) => {
     currentUser ? { username: currentUser.username } : null,
   );
 
+  const getAuthHeader = useCallback(() => {
+    const userId = JSON.parse(localStorage.getItem('userId'));
+    if (userId && userId.token) {
+      return { Authorization: `Bearer ${userId.token}` };
+    }
+    return {};
+  }, []);
+
   const logIn = useCallback((userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
     setUser({ username: userData.username });
@@ -21,8 +29,10 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const context = useMemo(
-    () => ({ logIn, logOut, user }),
-    [logIn, logOut, user],
+    () => ({
+      logIn, logOut, user, getAuthHeader,
+    }),
+    [logIn, logOut, user, getAuthHeader],
   );
 
   return (

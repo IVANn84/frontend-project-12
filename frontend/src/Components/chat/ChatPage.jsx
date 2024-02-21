@@ -10,13 +10,14 @@ import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
 import routes from '../../hooks/routes.js';
-import getAuthHeader from '../api/getAuthHeader.js';
+import { useAuth } from '../../hooks/index.js';
 
 const ChatPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
   const type = useSelector((state) => state.modals.type);
+  const { getAuthHeader } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
