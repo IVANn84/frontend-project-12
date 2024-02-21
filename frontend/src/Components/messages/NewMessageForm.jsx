@@ -22,9 +22,9 @@ const NewMessageForm = () => {
 
   const formik = useFormik({
     initialValues: { messageBody: '' },
-    onSubmit: ({ messageBody }, { resetForm }) => {
+    onSubmit: async ({ messageBody }, { resetForm }) => {
       try {
-        socket.newMessage({
+        await socket.newMessage({
           body: filterWords(messageBody),
           channelId: currentChannelId,
           username,

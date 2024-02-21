@@ -13,7 +13,7 @@ const SocketProvider = ({ socket, children }) => {
 
   const newMessage = useCallback(
     async (messageData) => {
-      socket.emit('newMessage', messageData, ({ status }) => {
+      await socket.emit('newMessage', messageData, ({ status }) => {
         if (status !== 'ok') {
           toast.error(t('notifications.errMessage'));
         }
@@ -31,15 +31,15 @@ const SocketProvider = ({ socket, children }) => {
   }, [dispatch, socket]);
 
   const removeChannel = useCallback(
-    (channelId) => {
-      socket.emit('removeChannel', { id: channelId });
+    async (channelId) => {
+      await socket.emit('removeChannel', { id: channelId });
     },
     [socket],
   );
 
   const renameChannel = useCallback(
-    (channelId, newNameChannel) => {
-      socket.emit('renameChannel', { id: channelId, name: newNameChannel });
+    async (channelId, newNameChannel) => {
+      await socket.emit('renameChannel', { id: channelId, name: newNameChannel });
     },
     [socket],
   );
