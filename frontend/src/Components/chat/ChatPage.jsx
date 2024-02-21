@@ -31,9 +31,9 @@ const ChatPage = () => {
         setFetching(false);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
-          toast.error(t('notification.notАuthorized'));
+          toast.error(t('notifications.notАuthorized'));
         } else {
-          toast.error(t('notification.another'));
+          toast.error(t('notifications.another'));
         }
       }
     };
