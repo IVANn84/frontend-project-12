@@ -1,25 +1,19 @@
 import {
-  createContext, useMemo, useTransition, useCallback,
+  createContext, useMemo, useCallback,
 } from 'react';
-import { toast } from 'react-toastify';
 
 import { useDispatch } from 'react-redux';
 import { addChannel, setCurrentChannel } from '../slices/channelsSlice.js';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
-  const { t } = useTransition();
   const dispatch = useDispatch();
 
   const newMessage = useCallback(
     async (messageData) => {
-      await socket.emit('newMessage', messageData, ({ status }) => {
-        if (status !== 'ok') {
-          toast.error(t('notifications.errMessage'));
-        }
-      });
+      await socket.emitWithAck('newMessage', messageData);
     },
-    [socket, t],
+    [socket],
   );
 
   const newChannel = useCallback(async (newNameChannel) => {
