@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { addMessages } from '../../slices/messagesSlice.js';
-import { addChannels } from '../../slices/channelsSlice.js';
+import { addChannels, defaultChannelId, setCurrentChannel } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
@@ -28,10 +28,12 @@ const ChatPage = () => {
         const { channels, messages } = data;
 
         dispatch(addChannels(channels));
+        dispatch(setCurrentChannel(defaultChannelId));
         dispatch(addMessages(messages));
         setFetching(false);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
+          console.error(error.response.status);
           toast.error(t('notifications.notАuthorized'));
         } else {
           toast.error(t('notifications.another'));

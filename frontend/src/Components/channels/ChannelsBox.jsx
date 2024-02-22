@@ -6,7 +6,7 @@ import { animateScroll } from 'react-scroll';
 import Channel from './Channel.jsx';
 import Channelicon from '../../icons/Channelicon.jsx';
 import { openModal } from '../../slices/modalsSlice.js';
-import { selectorsChannels, setCurrentChannel } from '../../slices/channelsSlice.js';
+import { selectorsChannels, setCurrentChannel, defaultChannelId } from '../../slices/channelsSlice.js';
 
 const ChannelsBox = () => {
   const { t } = useTranslation();
@@ -19,9 +19,8 @@ const ChannelsBox = () => {
 
   const lastChannelId = useSelector(selectorsChannels.selectAll).at(-1).id;
   useEffect(() => {
-    const defaultChannel = 1;
     const argument = { containerId: 'channels-box', delay: 0, duration: 0 };
-    if (currentChannelId === defaultChannel) {
+    if (currentChannelId === defaultChannelId) {
       animateScroll.scrollToTop(argument);
     } if (currentChannelId === lastChannelId) {
       animateScroll.scrollToBottom(argument);
