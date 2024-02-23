@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { addChannel, setCurrentChannel } from '../slices/channelsSlice.js';
+import { setCurrentChannel } from '../slices/channelsSlice.js';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
@@ -20,7 +20,7 @@ const SocketProvider = ({ socket, children }) => {
     const { data } = await socket.emitWithAck('newChannel', {
       name: newNameChannel,
     });
-    dispatch(addChannel(data));
+    // dispatch(addChannel(data));
     dispatch(setCurrentChannel(data.id));
   }, [dispatch, socket]);
 
