@@ -5,6 +5,8 @@ import {
 import { useDispatch } from 'react-redux';
 import { addChannel, setCurrentChannel } from '../slices/channelsSlice.js';
 
+const TIMEOUT = 4000;
+
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
@@ -16,8 +18,8 @@ const SocketProvider = ({ socket, children }) => {
     [socket],
   );
 
-  const newChannel = useCallback((newNameChannel) => {
-    const { data } = socket.emitWithAck('newChannel', {
+  const newChannel = useCallback(async (newNameChannel) => {
+    const { data } = await socket.timeout(TIMEOUT).emitWithAck('newChannel', {
       name: newNameChannel,
     });
     dispatch(addChannel(data));
