@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { addMessages } from '../../slices/messagesSlice.js';
 import { addChannels, defaultChannelId, setCurrentChannel } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
@@ -18,6 +19,7 @@ const ChatPage = () => {
   const [fetching, setFetching] = useState(true);
   const type = useSelector((state) => state.modals.type);
   const { getAuthHeader } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,9 +34,12 @@ const ChatPage = () => {
         dispatch(addMessages(messages));
         setFetching(false);
       } catch (error) {
-        if (error.isAxiosError && error.response.status === 401) {
+        if (error.isAxiosError) {
           console.error(error.response.status);
           toast.error(t('notifications.notАuthorized'));
+        }
+        if (error.response.status === 401) {
+          navigate(`${routes.chatSignup}`);
         } else {
           toast.error(t('notifications.another'));
         }
