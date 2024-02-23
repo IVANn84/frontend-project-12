@@ -2,22 +2,21 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { animateScroll } from 'react-scroll';
-import { selectorsChannels, defaultChannelId } from '../../slices/channelsSlice.js';
+// import { selectorsChannels, defaultChannelId } from '../../slices/channelsSlice.js';
 import { selectorsMessage } from '../../slices/messagesSlice.js';
 import Message from '../messages/Message.jsx';
 import NewMessageForm from '../messages/NewMessageForm.jsx';
 
 const ChatBox = () => {
   const { t } = useTranslation();
-  const currentChannelId = defaultChannelId;
+  // const currentChannelId = defaultChannelId;
 
-  const currentChannel = useSelector(
-    (state) => selectorsChannels.selectById(state, currentChannelId),
-  );
+  const currentChannel = useSelector((state) => state.channels.currentChannelId);
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
-    ({ channelId }) => channelId === currentChannelId,
+    ({ channelId }) => channelId === currentChannel,
   );
+  // debugger;
 
   useEffect(() => {
     const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
