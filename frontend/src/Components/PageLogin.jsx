@@ -40,6 +40,8 @@ const PageLogin = () => {
         if (error.response.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
+          navigate(`${routes.chatSignup}`);
+          toast.error(t('notifications.usernotАuthorized'));
         } else {
           toast.error(t('errors.network'));
         }
