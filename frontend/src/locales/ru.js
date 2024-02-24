@@ -81,7 +81,6 @@ const ru = {
       errorRemoveChannel: 'Возникла ошибка при удалении канала',
       errorRenameChannel: 'Возникла ошибка при переименовании канала',
       errorCurrentChanel: 'канала не может быть удален',
-      usernotАuthorized: 'Вы не зарегистрированны',
     },
   },
 };

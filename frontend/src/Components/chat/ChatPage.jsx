@@ -39,6 +39,7 @@ const ChatPage = () => {
           toast.error(t('notifications.notАuthorized'));
         }
         if (error.response.status === 401) {
+          toast.error(t('notifications.notАuthorized'));
           navigate(`${routes.chatSignup}`);
         } else {
           toast.error(t('notifications.another'));
