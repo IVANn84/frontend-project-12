@@ -10,6 +10,7 @@ const Channel = ({
 }) => {
   const { t } = useTranslation();
   const variant = channel.id === currentChannelId ? 'secondary' : null;
+  // thrhrthrthrth
 
   return (
     <li key={channel.id} className="nav-item w-100">
