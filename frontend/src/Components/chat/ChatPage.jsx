@@ -33,7 +33,6 @@ const ChatPage = () => {
         dispatch(setCurrentChannel(defaultChannelId));
         dispatch(addMessages(messages));
         setFetching(false);
-        // fefwefwefwef
       } catch (error) {
         if (error.isAxiosError) {
           console.error(error.response.status);
