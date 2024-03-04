@@ -53,8 +53,8 @@ const Add = () => {
       try {
         const { id } = await socket.newChannel(filteredNameChannel);
         toast.success(t('notifications.addChannel'));
-        resetForm();
         dispatch(setCurrentChannel(id));
+        resetForm();
       } catch (error) {
         toast.error(t('notifications.errorAddChannel'));
       } finally {
