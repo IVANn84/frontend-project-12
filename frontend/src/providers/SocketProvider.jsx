@@ -20,7 +20,7 @@ const SocketProvider = ({ socket, children }) => {
 
   const removeChannel = useCallback(
     async (channelId) => {
-      await socket.emit('removeChannel', { id: channelId });
+      await socket.emitWithAck('removeChannel', { id: channelId });
     },
     [socket],
   );
