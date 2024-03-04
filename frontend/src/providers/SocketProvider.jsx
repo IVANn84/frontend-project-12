@@ -27,7 +27,7 @@ const SocketProvider = ({ socket, children }) => {
 
   const renameChannel = useCallback(
     async (channelId, newNameChannel) => {
-      await socket.emit('renameChannel', { id: channelId, name: newNameChannel });
+      await socket.emitWithAck('renameChannel', { id: channelId, name: newNameChannel });
     },
     [socket],
   );
