@@ -16,7 +16,6 @@ const Remove = () => {
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
   );
-  // debugger;
   const handleClose = () => dispatch(closeModal());
   const handleRemove = async () => {
     setLoading(true);

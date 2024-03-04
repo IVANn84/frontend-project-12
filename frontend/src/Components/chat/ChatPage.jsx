@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { addMessages } from '../../slices/messagesSlice.js';
-import { addChannels, defaultChannelId, setCurrentChannel } from '../../slices/channelsSlice.js';
+import { loadChannels } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
@@ -29,8 +29,7 @@ const ChatPage = () => {
         });
         const { channels, messages } = data;
 
-        dispatch(addChannels(channels));
-        dispatch(setCurrentChannel(defaultChannelId));
+        dispatch(loadChannels(channels));
         dispatch(addMessages(messages));
         setFetching(false);
       } catch (error) {
