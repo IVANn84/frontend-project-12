@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { selectorsChannels } from '../../slices/channelsSlice.js';
+import { selectorsChannels, setCurrentChannel } from '../../slices/channelsSlice.js';
 import { closeModal } from '../../slices/modalsSlice.js';
 import { useSocket, useFilter } from '../../hooks/index';
 
@@ -14,14 +14,14 @@ const Add = () => {
   const socket = useSocket();
   const inputRef = useRef(null);
   const filterWords = useFilter();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
     ({ name }) => name,
   );
   const isOpened = useSelector((state) => state.modals.isOpened);
 
-  const handlerClose = () => dispath(closeModal());
+  const handlerClose = () => dispatch(closeModal());
 
   useEffect(() => {
     if (inputRef.current) {
@@ -51,9 +51,10 @@ const Add = () => {
       const filteredNameChannel = filterWords(name);
 
       try {
-        await socket.newChannel(filteredNameChannel);
+        const { id } = await socket.newChannel(filteredNameChannel);
         toast.success(t('notifications.addChannel'));
         resetForm();
+        dispatch(setCurrentChannel(id));
       } catch (error) {
         toast.error(t('notifications.errorAddChannel'));
       } finally {
