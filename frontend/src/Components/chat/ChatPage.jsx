@@ -46,7 +46,7 @@ const ChatPage = () => {
       }
     };
     fetchData();
-  });
+  }, [dispatch, getAuthHeader, t, navigate]);
 
   return fetching ? (
     <div className="h-100 d-flex justify-content-center align-items-center">
