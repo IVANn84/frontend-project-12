@@ -7,6 +7,7 @@ const ru = {
     hexletChat: 'Hexlet Chat',
     logOut: 'Выйти',
     alt: 'Изображение',
+    spinner: '0 сообщений',
 
     signup: {
       required: 'Обязательное поле',

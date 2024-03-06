@@ -51,7 +51,7 @@ const ChatPage = () => {
   return fetching ? (
     <div className="h-100 d-flex justify-content-center align-items-center">
       <Spinner animation="border" role="status" variant="primary">
-        <span className="visually-hidden">0 сообщений</span>
+        <span className="visually-hidden">{t('spinner')}</span>
       </Spinner>
     </div>
   ) : (
