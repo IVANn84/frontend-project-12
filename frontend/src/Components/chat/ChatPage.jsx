@@ -24,10 +24,9 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(routes.usersPath(), {
+        const { data: { channels, messages } } = await axios.get(routes.usersPath(), {
           headers: getAuthHeader(),
         });
-        const { channels, messages } = data;
 
         dispatch(loadChannels(channels));
         dispatch(addMessages(messages));
