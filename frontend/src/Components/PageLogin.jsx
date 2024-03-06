@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../hooks/index.js';
 import avatar from '../assets/avatar.jpg';
-import routes from '../hooks/routes.js';
+import routes from './routes.js';
 
 const PageLogin = () => {
   const auth = useAuth();

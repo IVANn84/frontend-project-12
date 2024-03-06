@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useAuth } from '../hooks/index.js';
-import routes from '../hooks/routes.js';
+import routes from './routes.js';
 import avatarReg from '../assets/avatarReg.jpg';
 
 const Registration = () => {

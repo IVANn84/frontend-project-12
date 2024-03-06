@@ -30,6 +30,7 @@ const NewMessageForm = () => {
           username,
         });
 
+        inputRef.current.focus();
         resetForm();
       } catch (error) {
         console.error(error);

@@ -3,7 +3,7 @@ import { Button, Navbar as BootstrapNavbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/index.js';
-import routes from '../hooks/routes.js';
+import routes from './routes.js';
 
 const Navbar = () => {
   const { logOut, user } = useAuth();

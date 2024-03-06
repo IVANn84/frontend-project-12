@@ -10,7 +10,7 @@ import { loadChannels } from '../../slices/channelsSlice.js';
 import ChannelsBox from '../channels/ChannelsBox.jsx';
 import getModalComponent from '../modals/index.js';
 import ChatBox from './ChatBox.jsx';
-import routes from '../../hooks/routes.js';
+import routes from '../routes.js';
 import { useAuth } from '../../hooks/index.js';
 
 const ChatPage = () => {

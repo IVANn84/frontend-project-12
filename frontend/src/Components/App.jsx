@@ -14,7 +14,7 @@ import PageLogin from './PageLogin.jsx';
 import ChatPage from './chat/ChatPage.jsx';
 import Navbar from './Navbar.jsx';
 import { useAuth } from '../hooks/index.js';
-import routes from '../hooks/routes.js';
+import routes from './routes.js';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
