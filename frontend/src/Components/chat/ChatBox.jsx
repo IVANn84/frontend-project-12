@@ -12,15 +12,15 @@ const ChatBox = () => {
 
   // const currentId = useSelector((state) => state.channels.currentChannelId);
 
-  const currentChannel = useSelector((state) => state.channels.currentChannelId);
+  const currentId = useSelector((state) => state.channels.currentChannelId);
 
-  // const currentChannel2 = useSelector((state) => {
-  //   const { currentChannelId } = state.channels;
-  //   const res = Object.values(state.channels.entities);
-  //   console.log(currentChannelId);
-  //   return Object.values(state.channels.entities)
-  //     .find((channel) => channel.id === currentChannelId);
-  // });
+  const currentChannel = useSelector((state) => {
+    const { currentChannelId } = state.channels;
+    // const res = Object.values(state.channels.entities);
+    // console.log(currentChannelId);
+    return Object.values(state.channels.entities)
+      .find((channel) => channel.id === currentChannelId);
+  });
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
     ({ channelId }) => channelId === currentId,
