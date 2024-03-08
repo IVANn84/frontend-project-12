@@ -13,7 +13,7 @@ const Rename = () => {
   const filterWords = useFilter();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const socket = useSocket();
+  const { sockets: { renameChannel } } = useSocket();
   const inputRef = useRef(null);
   const channalId = useSelector((state) => state.modals.extra.channalId);
   const existingChannels = useSelector(selectorsChannels.selectAll).map(
@@ -37,7 +37,7 @@ const Rename = () => {
     onSubmit: async ({ name }) => {
       const filteredRename = filterWords(name);
       try {
-        await socket.renameChannel(channalId, filteredRename);
+        await renameChannel(channalId, filteredRename);
         toast.success(t('notifications.renameChannel'));
         dispatch(closeModal());
       } catch (error) {

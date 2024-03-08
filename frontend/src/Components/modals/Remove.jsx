@@ -10,7 +10,7 @@ const Remove = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const socket = useSocket();
+  const { sockets: { removeChannel } } = useSocket();
   const isOpened = useSelector((state) => state.modals.isOpened);
   const channalId = useSelector((state) => state.modals.extra.channalId);
 
@@ -18,7 +18,7 @@ const Remove = () => {
   const handleRemove = async () => {
     setLoading(true);
     try {
-      await socket.removeChannel(channalId);
+      await removeChannel(channalId);
       toast.success(t('notifications.removeChannel'));
       dispatch(closeModal());
     } catch (error) {

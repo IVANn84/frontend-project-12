@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -10,20 +11,18 @@ import NewMessageForm from '../messages/NewMessageForm.jsx';
 const ChatBox = () => {
   const { t } = useTranslation();
 
-  // const currentId = useSelector((state) => state.channels.currentChannelId);
-
   const currentId = useSelector((state) => state.channels.currentChannelId);
 
   const currentChannel = useSelector((state) => {
     const { currentChannelId } = state.channels;
-    // const res = Object.values(state.channels.entities);
-    // console.log(currentChannelId);
-    return Object.values(state.channels.entities)
-      .find((channel) => channel.id === currentChannelId);
+
+    return Object.values(state.channels.entities).find(
+      (channel) => channel.id === currentChannelId
+    );
   });
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
-    ({ channelId }) => channelId === currentId,
+    ({ channelId }) => channelId === currentId
   );
 
   // eslint-disable-next-line no-debugger

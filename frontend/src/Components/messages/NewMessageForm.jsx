@@ -10,7 +10,7 @@ import SendMessageIcon from '../../icons/SendMessagesIcons.jsx';
 const NewMessageForm = () => {
   const filterWords = useFilter();
   const { t } = useTranslation();
-  const socket = useSocket();
+  const { sockets: { newMessage } } = useSocket();
   const {
     user: { username },
   } = useAuth();
@@ -24,7 +24,7 @@ const NewMessageForm = () => {
     initialValues: { messageBody: '' },
     onSubmit: async ({ messageBody }, { resetForm }) => {
       try {
-        await socket.newMessage({
+        await newMessage({
           body: filterWords(messageBody),
           channelId: currentChannelId,
           username,
