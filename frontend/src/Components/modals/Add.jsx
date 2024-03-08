@@ -11,7 +11,8 @@ import { useSocket, useFilter } from '../../hooks/index';
 
 const Add = () => {
   const { t } = useTranslation();
-  const socket = useSocket();
+  const { sockets: { newChannel } } = useSocket();
+
   const inputRef = useRef(null);
   const filterWords = useFilter();
   const dispatch = useDispatch();
@@ -47,11 +48,15 @@ const Add = () => {
     }),
     validateOnBlur: false,
     validateOnChange: false,
+
     onSubmit: async ({ name }, { resetForm }) => {
       const filteredNameChannel = filterWords(name);
 
       try {
-        const { id } = await socket.newChannel(filteredNameChannel);
+        const { id } = await newChannel(filteredNameChannel);
+        console.log(id);
+        // eslint-disable-next-line no-debugger
+        // debugger;
         toast.success(t('notifications.addChannel'));
         dispatch(setCurrentChannel(id));
         resetForm();

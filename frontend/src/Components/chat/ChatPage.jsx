@@ -27,6 +27,8 @@ const ChatPage = () => {
         const { data: { channels, messages } } = await axios.get(routes.usersPath(), {
           headers: getAuthHeader(),
         });
+        // eslint-disable-next-line no-debugger
+        // debugger;
 
         dispatch(loadChannels(channels));
         dispatch(addMessages(messages));

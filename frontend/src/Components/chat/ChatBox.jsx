@@ -5,15 +5,29 @@ import { animateScroll } from 'react-scroll';
 import { selectorsMessage } from '../../slices/messagesSlice.js';
 import Message from '../messages/Message.jsx';
 import NewMessageForm from '../messages/NewMessageForm.jsx';
+import { selectorsChannels } from '../../slices/channelsSlice.js';
 
 const ChatBox = () => {
   const { t } = useTranslation();
 
-  const currentChannel = useSelector((state) => state.channels.currentChannelId);
+  const currentId = useSelector((state) => state.channels.currentChannelId);
+
+  const currentChannel = useSelector((state) => selectorsChannels.selectById(state, currentId));
+
+  // const currentChannel2 = useSelector((state) => {
+  //   const { currentChannelId } = state.channels;
+  //   const res = Object.values(state.channels.entities);
+  //   console.log(currentChannelId);
+  //   return Object.values(state.channels.entities)
+  //     .find((channel) => channel.id === currentChannelId);
+  // });
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
-    ({ channelId }) => channelId === currentChannel,
+    ({ channelId }) => channelId === currentId,
   );
+
+  // eslint-disable-next-line no-debugger
+  // debugger;
 
   useEffect(() => {
     const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
