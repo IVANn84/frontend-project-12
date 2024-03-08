@@ -5,14 +5,14 @@ import { animateScroll } from 'react-scroll';
 import { selectorsMessage } from '../../slices/messagesSlice.js';
 import Message from '../messages/Message.jsx';
 import NewMessageForm from '../messages/NewMessageForm.jsx';
-import { selectorsChannels } from '../../slices/channelsSlice.js';
+// import { selectorsChannels } from '../../slices/channelsSlice.js';
 
 const ChatBox = () => {
   const { t } = useTranslation();
 
-  const currentId = useSelector((state) => state.channels.currentChannelId);
+  // const currentId = useSelector((state) => state.channels.currentChannelId);
 
-  const currentChannel = useSelector((state) => selectorsChannels.selectById(state, currentId));
+  const currentChannel = useSelector((state) => state.channels.currentChannelId);
 
   // const currentChannel2 = useSelector((state) => {
   //   const { currentChannelId } = state.channels;
