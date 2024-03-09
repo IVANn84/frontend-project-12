@@ -16,10 +16,13 @@ const ChatBox = () => {
   const currentChannel = useSelector((state) => {
     const { currentChannelId } = state.channels;
 
-    return Object.values(state.channels.entities).find(
+    const res = Object.values(state.channels.entities).find(
       (channel) => channel.id === currentChannelId
     );
+
+    return res;
   });
+  // console.log(currentChannel);
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
     ({ channelId }) => channelId === currentId

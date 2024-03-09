@@ -53,15 +53,15 @@ const Add = () => {
       const filteredNameChannel = filterWords(name);
 
       try {
-        const { id } = await newChannel(filteredNameChannel);
-        console.log(id);
+        const { data } = await newChannel(filteredNameChannel);
+        console.log(data);
         // eslint-disable-next-line no-debugger
-        // debugger;
+        debugger;
         toast.success(t('notifications.addChannel'));
-        dispatch(setCurrentChannel(id));
+        dispatch(setCurrentChannel(data.id));
         resetForm();
       } catch (error) {
-        toast.error(t('notifications.errorAddChannel'));
+        // toast.error(t('notifications.errorAddChannel'));
       } finally {
         handlerClose();
       }
