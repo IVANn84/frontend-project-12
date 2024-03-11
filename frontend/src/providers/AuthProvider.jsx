@@ -1,3 +1,6 @@
+/* eslint-disable no-debugger */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable indent */
 import {
   createContext, useCallback, useMemo, useState,
 } from 'react';
@@ -5,19 +8,14 @@ import {
 export const authContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const currentUser = JSON.parse(localStorage.getItem('userId'));
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
   const [user, setUser] = useState(
-    currentUser ? { username: currentUser.username } : null,
+    userId ? { username: userId.username } : null,
   );
 
-  const getAuthHeader = useCallback(() => {
-    const userId = JSON.parse(localStorage.getItem('userId'));
-    if (userId && userId.token) {
-      return { Authorization: `Bearer ${userId.token}` };
-    }
-    return {};
-  }, []);
-
+  const getAuthHeader = () => ((userId && userId.token) ? userId.token : {});
+      // return { Authorization: `Bearer ${userId.token}` };
   const logIn = useCallback((userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
     setUser({ username: userData.username });

@@ -25,7 +25,7 @@ const ChatPage = () => {
     const fetchData = async () => {
       try {
         const { data: { channels, messages } } = await axios.get(routes.usersPath(), {
-          headers: getAuthHeader(),
+          headers: { Authorization: `Bearer ${getAuthHeader()}` },
         });
 
         dispatch(loadChannels(channels));
