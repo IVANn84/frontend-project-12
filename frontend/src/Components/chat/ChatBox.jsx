@@ -9,12 +9,19 @@ import NewMessageForm from '../messages/NewMessageForm.jsx';
 const ChatBox = () => {
   const { t } = useTranslation();
 
-  const currentChannel = useSelector((state) => state.channels.currentChannelId);
+  const currentId = useSelector((state) => state.channels.currentChannelId);
+
+  const currentChannel = useSelector((state) => {
+    const { currentChannelId } = state.channels;
+
+    return Object.values(state.channels.entities).find(
+      (channel) => channel.id === currentChannelId,
+    );
+  });
 
   const messages = useSelector(selectorsMessage.selectAll).filter(
-    ({ channelId }) => channelId === currentChannel,
+    ({ channelId }) => channelId === currentId,
   );
-
   useEffect(() => {
     const argument = { containerId: 'messages-box', delay: 0, duration: 0 };
     animateScroll.scrollToBottom(argument);
@@ -24,7 +31,7 @@ const ChatBox = () => {
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
         <p className="m-0">
-          <b>{`# ${currentChannel.name}`}</b>
+          <b>{`# ${currentChannel?.name}`}</b>
         </p>
         <span className="text-muted">
           {`${t('messagesCounter.messages', {

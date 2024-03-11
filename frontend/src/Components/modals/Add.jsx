@@ -51,11 +51,12 @@ const Add = () => {
       const filteredNameChannel = filterWords(name);
 
       try {
-        const { id } = await socket.newChannel(filteredNameChannel);
+        const { data } = await socket.newChannel(filteredNameChannel);
         toast.success(t('notifications.addChannel'));
-        dispatch(setCurrentChannel(id));
+        dispatch(setCurrentChannel(data.id));
         resetForm();
       } catch (error) {
+        console.log(error);
         toast.error(t('notifications.errorAddChannel'));
       } finally {
         handlerClose();

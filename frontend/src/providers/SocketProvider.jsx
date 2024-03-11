@@ -1,3 +1,5 @@
+/* eslint-disable no-return-await */
+/* eslint-disable no-debugger */
 import {
   createContext, useMemo, useCallback,
 } from 'react';
@@ -11,12 +13,9 @@ const SocketProvider = ({ socket, children }) => {
     [socket],
   );
 
-  const newChannel = useCallback(async (newNameChannel) => {
-    const { data } = await socket.emitWithAck('newChannel', {
-      name: newNameChannel,
-    });
-    return data;
-  }, [socket]);
+  const newChannel = useCallback(async (newNameChannel) => await socket.emitWithAck('newChannel', {
+    name: newNameChannel,
+  }), [socket]);
 
   const removeChannel = useCallback(
     async (channelId) => {
