@@ -1,9 +1,5 @@
-/* eslint-disable no-debugger */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable indent */
-import {
-  createContext, useCallback, useMemo, useState,
-} from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 export const authContext = createContext({});
 
@@ -14,23 +10,26 @@ const AuthProvider = ({ children }) => {
     userId ? { username: userId.username } : null,
   );
 
-  const getAuthHeader = () => ((userId && userId.token) ? userId.token : {});
-      // return { Authorization: `Bearer ${userId.token}` };
-  const logIn = useCallback((userData) => {
+  const getAuthToken = () => (userId && userId.token ? userId.token : {});
+
+  const logIn = (userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
     setUser({ username: userData.username });
-  }, []);
+  };
 
-  const logOut = useCallback(() => {
+  const logOut = () => {
     localStorage.removeItem('userId');
     setUser(null);
-  }, []);
+  };
 
   const context = useMemo(
     () => ({
-      logIn, logOut, user, getAuthHeader,
+      logIn,
+      logOut,
+      user,
+      getAuthToken,
     }),
-    [logIn, logOut, user, getAuthHeader],
+    [logIn, logOut, user, getAuthToken],
   );
 
   return (

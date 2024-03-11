@@ -18,14 +18,16 @@ const ChatPage = () => {
   const dispatch = useDispatch();
   const [fetching, setFetching] = useState(true);
   const type = useSelector((state) => state.modals.type);
-  const { getAuthHeader } = useAuth();
+  const { getAuthToken } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: { channels, messages } } = await axios.get(routes.usersPath(), {
-          headers: { Authorization: `Bearer ${getAuthHeader()}` },
+        const {
+          data: { channels, messages },
+        } = await axios.get(routes.usersPath(), {
+          headers: { Authorization: `Bearer ${getAuthToken()}` },
         });
 
         dispatch(loadChannels(channels));
@@ -45,7 +47,7 @@ const ChatPage = () => {
       }
     };
     fetchData();
-  }, [dispatch, getAuthHeader, t, navigate]);
+  }, [dispatch, getAuthToken, t, navigate]);
 
   return fetching ? (
     <div className="h-100 d-flex justify-content-center align-items-center">
