@@ -1,35 +1,21 @@
-/* eslint-disable no-return-await */
-/* eslint-disable no-debugger */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
-  createContext, useMemo, useCallback,
+  createContext, useMemo,
 } from 'react';
 
 export const SocketContext = createContext({});
 const SocketProvider = ({ socket, children }) => {
-  const newMessage = useCallback(
-    async (messageData) => {
-      await socket.emitWithAck('newMessage', messageData);
-    },
-    [socket],
-  );
+  const newMessage = async (messageData) => {
+    await socket.emitWithAck('newMessage', messageData);
+  };
 
-  const newChannel = useCallback(async (newNameChannel) => await socket.emitWithAck('newChannel', {
+  const newChannel = async (newNameChannel) => socket.emitWithAck('newChannel', {
     name: newNameChannel,
-  }), [socket]);
+  });
 
-  const removeChannel = useCallback(
-    async (channelId) => {
-      await socket.emitWithAck('removeChannel', { id: channelId });
-    },
-    [socket],
-  );
+  const removeChannel = async (channelId) => socket.emitWithAck('removeChannel', { id: channelId });
 
-  const renameChannel = useCallback(
-    async (channelId, newNameChannel) => {
-      await socket.emitWithAck('renameChannel', { id: channelId, name: newNameChannel });
-    },
-    [socket],
-  );
+  const renameChannel = async (channelId, newNameChannel) => socket.emitWithAck('renameChannel', { id: channelId, name: newNameChannel });
 
   const context = useMemo(
     () => ({
