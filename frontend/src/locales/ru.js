@@ -44,6 +44,9 @@ const ru = {
     errors: {
       network: 'Ошибка соединения',
       unknown: 'Неизвестная ошибка',
+      body: 'Страница не найдена',
+      errorName: 'Ошибка 404',
+      home: 'Домой!',
     },
 
     modals: {

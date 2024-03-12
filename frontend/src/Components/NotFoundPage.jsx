@@ -1,23 +1,19 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 import routes from './routes.js';
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="text-center">
-      <img
-        alt={t('notFound')}
-        style={{ maxHeight: '25vh' }}
-        className="img-fluid h-25"
-      />
-      <h1 className="h4 text-muted">{t('notFound')}</h1>
-      <p className="text-muted">
-        {t('returnToHome')}
-        <Link to={routes.home()}>{t('toMain')}</Link>
-      </p>
-    </div>
+    <Card className="text-center h-100">
+      <Card.Body>
+        <Card.Text>{t('errors.body')}</Card.Text>
+        <Card.Text>{t('errors.errorName')}</Card.Text>
+        <Link to={routes.chatPageLogin}>{t('errors.home')}</Link>
+      </Card.Body>
+    </Card>
   );
 };
 

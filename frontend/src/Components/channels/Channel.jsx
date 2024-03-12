@@ -14,7 +14,7 @@ const Channel = ({
   return (
     <li key={channel.id} className="nav-item w-100">
       {channel.removable ? (
-        <Dropdown as={ButtonGroup} className="d-flex">
+        <div role="group" className="d-flex dropdown btn-group">
           <Button
             type="button"
             key={channel.id}
@@ -25,23 +25,25 @@ const Channel = ({
             <span className="me-1">#</span>
             {channel.name}
           </Button>
-          <Dropdown.Toggle split className="flex-grow-0" variant={variant}>
-            <span className="visually-hidden">{t('channels.menu')}</span>
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => handleRemoveChannel(channel.id)}>
-              {t('channels.remove')}
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => handleRenameChannel(channel.id)}>
-              {t('channels.rename')}
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+          <Dropdown as={ButtonGroup} className="d-flex">
+            <Dropdown.Toggle split className="flex-grow-0" variant={variant}>
+              <span className="visually-hidden">{t('channels.menu')}</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleRemoveChannel(channel.id)}>
+                {t('channels.remove')}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleRenameChannel(channel.id)}>
+                {t('channels.rename')}
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       ) : (
         <Button
           type="button"
           key={channel.id}
-          className="w-100 rounded-0 text-start "
+          className="w-100 rounded-0 text-start"
           onClick={() => handleChoose(channel.id)}
           variant={variant}
         >
