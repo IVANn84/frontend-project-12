@@ -34,23 +34,20 @@ const NewMessageForm = () => {
         resetForm();
       } catch (error) {
         console.error(error);
+      } finally {
+        inputRef.current.focus();
       }
     },
     validationSchema: yup.object().shape({
       messageBody: yup.string().required(),
     }),
   });
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [currentChannelId]);
 
   useEffect(() => {
-    if (formik.values.messageBody === '') {
+    if (!formik.isSubmitting) {
       inputRef.current.focus();
     }
-  }, [formik.values.messageBody]);
+  }, [formik.isSubmitting, currentChannelId]);
 
   return (
     <div className="mt-auto px-5 py-3">
