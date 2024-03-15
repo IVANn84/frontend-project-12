@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
     userId ? { username: userId.username } : null,
   );
 
-  const getAuthToken = () => (userId?.token ? userId.token : {});
+  const getAuthToken = () => (userId?.token ? userId.token : null);
 
   const logIn = (userData) => {
     localStorage.setItem('userId', JSON.stringify(userData));
