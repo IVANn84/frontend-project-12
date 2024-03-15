@@ -37,7 +37,7 @@ const init = async () => {
 
   socket.on('newMessage', (payload) => store.dispatch(addMessage(payload)));
   socket.on('newChannel', (payload) => store.dispatch(addChannel(payload)));
-  socket.on('removeChannel', (channel) => store.dispatch(removeChannel(channel.id)));
+  socket.on('removeChannel', ({ id }) => store.dispatch(removeChannel(id)));
   socket.on('renameChannel', (channel) => store.dispatch(
     renameChannel({
       id: channel.id,
