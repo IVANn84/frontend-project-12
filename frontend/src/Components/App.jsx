@@ -19,7 +19,7 @@ import routes from './routes.js';
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
   const locattion = useLocation();
-  return user ? children : <Navigate to="/login" state={{ from: locattion }} />;
+  return user ? children : <Navigate to={routes.chatPageLogin} state={{ from: locattion }} />;
 };
 
 const App = () => (
